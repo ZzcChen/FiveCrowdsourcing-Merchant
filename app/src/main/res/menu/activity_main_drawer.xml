@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/info_merchant"
+            android:icon="@drawable/ic_menu_merchant"
+            android:title="商户信息" />
+        <item
+            android:id="@+id/assightment"
+            android:icon="@drawable/ic_menu_assignment"
+            android:title="呼单列表" />
+    </group>
+    <item android:title="帮助&amp;反馈">
+<menu>
+    <item
+        android:id="@+id/rule"
+        android:icon="@drawable/ic_menu_introduction"
+        android:title="配送规则" />
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_menu_manage"
+        android:title="设置" />
+</menu>
+    </item>
+
+</menu>
