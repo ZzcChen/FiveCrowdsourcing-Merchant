@@ -1,10 +1,10 @@
 package com.example.administrator.fivecrowdsourcing_merchant.presenter;
 
-import android.content.Intent;
-
-import com.example.administrator.fivecrowdsourcing_merchant.MainActivity;
 import com.example.administrator.fivecrowdsourcing_merchant.model.Merchant;
 import com.example.administrator.fivecrowdsourcing_merchant.view.LoginView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -20,6 +20,8 @@ public class LoginPresenter {
     private String servletName="LoginServlet";
     private String servletIP;
     private String result;
+    private String jsonData;
+    private Merchant merchant=new Merchant();
 
     public LoginPresenter(LoginView loginView) {
         this.loginView = loginView;
@@ -44,15 +46,29 @@ public class LoginPresenter {
                             post(requestBody).
                             build();
                     Response response = client.newCall(request).execute();
-                    result = response.body().string().toString();
-                    if ("success".equals(result) ) {
-                        loginView.onSuccess();
-                    }
+                    jsonData= response.body().string().toString();
+                    parseJSONWithJONObject(jsonData);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }).start();
+    }
+
+
+    private void parseJSONWithJONObject(String jsonData) {
+        try {
+            JSONObject jsonObject = new JSONObject(jsonData);
+            merchant.setPhone(jsonObject .getString("phone"));
+            merchant.setName(jsonObject .getString("name"));
+            result=jsonObject.getString("result");
+            if(result.equals("success")){
+                loginView.onSuccess(merchant);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public String getResult() {

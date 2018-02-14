@@ -1,7 +1,9 @@
-package com.example.administrator.fivecrowdsourcing_merchant;
+package com.example.administrator.fivecrowdsourcing_merchant.view;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -14,14 +16,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.example.administrator.fivecrowdsourcing_merchant.R;
+import com.example.administrator.fivecrowdsourcing_merchant.model.Merchant;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private TextView phone;
+    private TextView name;
+    private static final int SHOW_MERCHANT=1;//显示商家联系人信息
+    Merchant merchant=new Merchant();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //获得商家信息
+        merchant= (Merchant) getIntent().getSerializableExtra("merchant");
+        String name=merchant.getName();
+        initView();
+    }
+
+
+    private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -33,6 +52,13 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //初始化商家信息
+        View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        phone  = (TextView)headerLayout.findViewById(R.id.phone);
+        name = (TextView)headerLayout.findViewById(R.id.name);
+        phone.setText(merchant.getPhone());
+        name.setText(merchant.getName());
     }
 
     @Override

@@ -1,10 +1,12 @@
 package com.example.administrator.fivecrowdsourcing_merchant.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2018/2/13.
  */
 
-public class Merchant {
+public class Merchant implements Serializable {
     private Long merchantid;//商户id
     private Long tofgid;//待配送物件种类id
     private String name;//联系人姓名

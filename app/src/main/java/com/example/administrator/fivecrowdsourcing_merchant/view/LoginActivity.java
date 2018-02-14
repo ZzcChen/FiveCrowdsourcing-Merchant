@@ -6,10 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.example.administrator.fivecrowdsourcing_merchant.MainActivity;
 import com.example.administrator.fivecrowdsourcing_merchant.R;
+import com.example.administrator.fivecrowdsourcing_merchant.model.Merchant;
 import com.example.administrator.fivecrowdsourcing_merchant.presenter.LoginPresenter;
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
@@ -21,7 +20,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         initView();
     }
 
@@ -38,8 +37,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
-    public void onSuccess() {
+    public void onSuccess(Merchant merchant) {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.putExtra("merchant",merchant);
         startActivity(intent);
     }
 }
