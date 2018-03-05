@@ -29,8 +29,12 @@ public class LoginPresenter {
 
     private LoginView loginView;//loginView接口
     public void Login(String phone,String password,String url){
-        servletIP=url+servletName;
-      sendRequestWithOkHttp(servletIP,phone,password);
+        //特殊通道，当服务器不行时直接登陆
+        merchant.setName("zzc");
+        loginView.onSuccess(merchant);
+
+//        servletIP=url+servletName;
+//      sendRequestWithOkHttp(servletIP,phone,password);
     }
 
     private void sendRequestWithOkHttp(final String servletIP, final String phone,final String password) {

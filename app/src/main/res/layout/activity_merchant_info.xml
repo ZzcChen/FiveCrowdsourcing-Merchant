@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+   <include layout="@layout/app_bar_main"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="商户名称" />
+
+        <EditText
+            android:id="@+id/storename"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="40dp"
+            android:background="@null"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <View style="@style/LineH_Fill_Width1_5_ForView"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="商品种类"/>
+
+        <EditText
+            android:id="@+id/type_good"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="40dp"
+            android:background="@null"
+            android:hint="注意品类为商户经营类型，提交后不可修改"
+            android:inputType="number"
+            android:textColorHint="@color/light_grey_dark"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <View style="@style/LineH_Fill_Width1_5_ForView"/>
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="50dp"
+         android:background="@color/white"
+         android:gravity="center_vertical">
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="联系方式"/>
+
+         <EditText
+             android:id="@+id/add_address_tel"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_marginStart="40dp"
+             android:background="@null"
+             android:hint="请填写收货人手机号"
+             android:inputType="number"
+             android:textColorHint="@color/light_grey_dark"
+             android:textSize="14sp"/>
+     </LinearLayout>
+
+    <View style="@style/LineH_Fill_Width1_5_ForView"/>
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="50dp"
+         android:background="@color/white"
+         android:gravity="center_vertical">
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="商户地址"/>
+
+         <TextView
+             android:id="@+id/address"
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_marginEnd="25dp"
+             android:layout_marginStart="40dp"
+             android:layout_weight="1"
+             android:background="@null"
+             android:gravity="center_vertical"
+             android:textColor="@color/light_grey_dark"
+             android:textSize="14sp"/>
+
+         <ImageView
+             android:id="@+id/right"
+             android:layout_width="20dp"
+             android:layout_height="15.0dip"
+             android:layout_marginEnd="10.0dip"
+             android:layout_marginRight="10.0dip"
+             android:src="@drawable/ic_goto" />
+
+     </LinearLayout>
+    <View style="@style/LineH_Fill_Width1_5_ForView"/>
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:background="@color/line_grey_bg2">
+
+         <Button
+             android:id="@+id/merchant_save"
+             android:layout_width="match_parent"
+             android:layout_height="50dp"
+             android:layout_gravity="center"
+             android:text="下一步"
+             android:textColor="@color/colorPrimary" />
+     </LinearLayout>
+
+ </LinearLayout>

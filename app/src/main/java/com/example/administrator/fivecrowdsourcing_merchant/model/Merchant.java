@@ -19,11 +19,12 @@ public class Merchant implements Serializable {
     private String buslicensephoto;//工商营业执照存储地址
     private String foodbuslicensephoto;//食品经营许可证存储地址
     private Long margin;//保证金提交状态：1：提交；2：未提交
+    private double longitude;//经度
+    private double latitude;//纬度
 
     public Merchant() {
     }
-
-    public Merchant(Long merchantid, Long tofgid, String name, String idcardnumber, String idcardphoto, String password, String storename, String phone, String address, String buslicensephoto, String foodbuslicensephoto, Long margin) {
+    public Merchant(Long merchantid, Long tofgid, String name, String idcardnumber, String idcardphoto, String password, String storename, String phone, String address, String buslicensephoto, String foodbuslicensephoto, Long margin, double longitude, double latitude) {
         this.merchantid = merchantid;
         this.tofgid = tofgid;
         this.name = name;
@@ -36,6 +37,8 @@ public class Merchant implements Serializable {
         this.buslicensephoto = buslicensephoto;
         this.foodbuslicensephoto = foodbuslicensephoto;
         this.margin = margin;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     public Long getMerchantid() {
@@ -132,5 +135,21 @@ public class Merchant implements Serializable {
 
     public void setMargin(Long margin) {
         this.margin = margin;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 }

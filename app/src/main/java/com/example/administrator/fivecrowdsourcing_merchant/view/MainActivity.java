@@ -1,6 +1,7 @@
 package com.example.administrator.fivecrowdsourcing_merchant.view;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -26,7 +27,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private TextView phone;
     private TextView name;
-    private static final int SHOW_MERCHANT=1;//显示商家联系人信息
+    private TextView title;
+    //private static final int SHOW_MERCHANT=1;//显示商家联系人信息
     Merchant merchant=new Merchant();
 
     @Override
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity
     private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        title=findViewById(R.id.title);
+        title.setText("Five 商家版本");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -98,10 +102,13 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.info_merchant) {
+            // 商家信息认证
+            Intent intent=new Intent(MainActivity.this, MerchantInfoActivity.class);
+            intent.putExtra("merchant",merchant);
+            startActivity(intent);
+        }
+        //else if (id == R.id.nav_gallery) {
 //
 //        } else if (id == R.id.nav_slideshow) {
 //
