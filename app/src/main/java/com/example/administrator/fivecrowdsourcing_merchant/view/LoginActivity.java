@@ -12,7 +12,8 @@ import com.example.administrator.fivecrowdsourcing_merchant.model.Merchant;
 import com.example.administrator.fivecrowdsourcing_merchant.presenter.LoginPresenter;
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
-    public static String  URL="http://192.168.123.121:8080/FiveCrowdsourcing-Server/";
+    public static String  URL="http://192.168.123.121:8080/FiveCrowdsourcing-Server/";//寝室wifi
+//    public static String  URL="http://172.20.10.4:8080/FiveCrowdsourcing-Server/";//个人热点
     private EditText phone;
     private EditText pwd;
     private Button login;

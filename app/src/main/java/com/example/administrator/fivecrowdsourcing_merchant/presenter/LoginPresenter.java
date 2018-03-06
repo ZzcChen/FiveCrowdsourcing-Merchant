@@ -21,20 +21,20 @@ public class LoginPresenter {
     private String servletIP;
     private String result;
     private String jsonData;
+    private LoginView loginView;//loginView接口
     private Merchant merchant=new Merchant();
 
     public LoginPresenter(LoginView loginView) {
         this.loginView = loginView;
     }
 
-    private LoginView loginView;//loginView接口
-    public void Login(String phone,String password,String url){
-        //特殊通道，当服务器不行时直接登陆
-        merchant.setName("zzc");
-        loginView.onSuccess(merchant);
 
-//        servletIP=url+servletName;
-//      sendRequestWithOkHttp(servletIP,phone,password);
+    public void Login(String phone,String password,String url){
+//        //特殊通道，当服务器不行时直接登陆
+//        merchant.setName("zzc");
+//        loginView.onSuccess(merchant);
+        servletIP=url+servletName;
+      sendRequestWithOkHttp(servletIP,phone,password);
     }
 
     private void sendRequestWithOkHttp(final String servletIP, final String phone,final String password) {

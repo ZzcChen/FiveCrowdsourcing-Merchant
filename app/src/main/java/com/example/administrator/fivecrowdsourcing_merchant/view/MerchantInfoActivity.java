@@ -1,26 +1,37 @@
 package com.example.administrator.fivecrowdsourcing_merchant.view;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.baidu.location.LocationClient;
 import com.example.administrator.fivecrowdsourcing_merchant.R;
+import com.example.administrator.fivecrowdsourcing_merchant.model.Merchant;
+import com.example.administrator.fivecrowdsourcing_merchant.presenter.AddressPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MerchantInfoActivity extends AppCompatActivity {
+public class MerchantInfoActivity extends AppCompatActivity implements MerchantInfoView{
     private TextView title;
     private EditText storename;
     private  EditText phone;;
     private  EditText typeofgood;
     private  EditText address;
+    private AddressPresenter addressPresenter = new AddressPresenter(this);
+
+    public MerchantInfoActivity() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +48,24 @@ public class MerchantInfoActivity extends AppCompatActivity {
        iv.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-             //选择地址
-
+               // 权限判断
+               addressPresenter.isPermissions();
+               //选择地址界面
+               gotomap();
            }
        });
+
+    }
+
+
+    @Override
+    public void gotomap() {
+        Intent intent = new Intent(MerchantInfoActivity.this, MapsActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void finishStep1() {
 
     }
 }
