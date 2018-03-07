@@ -65,6 +65,7 @@ public class LoginPresenter {
             JSONObject jsonObject = new JSONObject(jsonData);
             merchant.setPhone(jsonObject .getString("phone"));
             merchant.setName(jsonObject .getString("name"));
+            merchant.setMerchantid(jsonObject.getLong("merchantid"));
             result=jsonObject.getString("result");
             if(result.equals("success")){
                 loginView.onSuccess(merchant);

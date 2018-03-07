@@ -56,10 +56,10 @@
             android:enabled="true"
             android:process=":remote" />
 
-
         <activity
             android:name=".view.MapsActivity"
             android:label="@string/title_activity_maps" />
+        <activity android:name=".view.Step2Activity"></activity>
     </application>
 
 </manifest>

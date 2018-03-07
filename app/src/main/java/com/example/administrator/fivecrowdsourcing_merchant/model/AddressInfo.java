@@ -6,17 +6,17 @@ import java.io.Serializable;
  * Created by Administrator on 2018/3/6.
  */
 
-public class Address implements Serializable {
+public class AddressInfo implements Serializable {
     private double latitude;//纬度
     private double longtitude;//经度
     private String city;//市
     private String district;//区
     private String street;//街道
 
-    public Address() {
+    public AddressInfo() {
     }
 
-    public Address(double latitude, double longtitude, String city, String district, String street) {
+    public AddressInfo(double latitude, double longtitude, String city, String district, String street) {
         this.latitude = latitude;
         this.longtitude = longtitude;
         this.city = city;
