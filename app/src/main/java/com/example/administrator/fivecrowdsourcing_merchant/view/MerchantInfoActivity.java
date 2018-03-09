@@ -90,6 +90,7 @@ public class MerchantInfoActivity extends AppCompatActivity implements MerchantI
     @Override
     public void finishStep1(Merchant merchant) {
         Intent intent = new Intent(MerchantInfoActivity.this, Step2Activity.class);
+        intent.putExtra("merchant",merchant);
         startActivity(intent);
     }
 }

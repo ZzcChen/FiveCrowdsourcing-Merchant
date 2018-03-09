@@ -42,47 +42,6 @@ public class MerchantInfoPresenter {
         this.merchant.setAddress(address);
         this.merchant.setLatitude(latitude);
         this.merchant.setLongitude(longtitude);
-        servletIP=URL+servletName;
-        sendRequestWithOkHttp(this.merchant,servletIP);
-    }
-
-    private void sendRequestWithOkHttp(final Merchant merchant, String servletIP) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    //转换成JSON格式
-                    Gson gson = new Gson();
-                    String merchantdata = gson.toJson(merchant);
-
-                    RequestBody requestBody = FormBody.create(MediaType.parse("application/json; charset=utf-8")
-                            , merchantdata);
-                    Request request = new Request.Builder().
-                            url(MerchantInfoPresenter.this.servletIP).
-                            post(requestBody).
-                            build();
-
-                    OkHttpClient client = new OkHttpClient();
-                    Response response = client.newCall(request).execute();
-
-                   String jsonData= response.body().string().toString();
-                    parseJSONWithJONObject(jsonData);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-
-    private void parseJSONWithJONObject(String jsonData) {
-        try {
-            JSONObject jsonObject = new JSONObject(jsonData);
-            String result=jsonObject.getString("result");
-            if(result.equals("success")){
-                merchantInfoView.finishStep1(merchant);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        merchantInfoView.finishStep1(this.merchant);
     }
 }

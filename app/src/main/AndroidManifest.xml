@@ -59,7 +59,13 @@
         <activity
             android:name=".view.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".view.Step2Activity"></activity>
+        <activity
+            android:name=".view.Step2Activity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.Step3Activity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

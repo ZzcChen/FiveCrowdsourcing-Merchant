@@ -1,9 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.administrator.fivecrowdsourcing_merchant.view.Step2Activity">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <include
+        layout="@layout/app_bar_main" />
+
+    <Button
+        android:id="@+id/click_business"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="上传工商营业执照" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/business"
+            android:layout_width="match_parent"
+            android:layout_height="157dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/common_full_open_on_phone" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/click_foodbusiness"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="上传食品经营许可证" />
+
+    <ImageView
+        android:id="@+id/foodbusiness"
+        android:layout_width="match_parent"
+        android:layout_height="157dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/common_full_open_on_phone" />
+
+    <Button
+        android:id="@+id/second_step"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:text="下一步"
+        android:textColor="@color/colorPrimary" />
+</LinearLayout>

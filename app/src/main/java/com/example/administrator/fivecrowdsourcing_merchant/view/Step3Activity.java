@@ -1,10 +1,8 @@
 package com.example.administrator.fivecrowdsourcing_merchant.view;
 
-import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.ContentUris;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,48 +10,41 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.example.administrator.fivecrowdsourcing_merchant.R;
 import com.example.administrator.fivecrowdsourcing_merchant.model.GlobalParameter;
 import com.example.administrator.fivecrowdsourcing_merchant.model.Merchant;
-import com.example.administrator.fivecrowdsourcing_merchant.presenter.Step2Presenter;
+import com.example.administrator.fivecrowdsourcing_merchant.presenter.Step3Presenter;
 import com.example.administrator.fivecrowdsourcing_merchant.presenter.UploadUtil;
-
-import org.w3c.dom.Document;
 
 import java.io.File;
 
-public class Step2Activity extends AppCompatActivity implements Step2View{
-    private TextView title;
-    private ImageView business;
-    private ImageView foodbusiness;
-    private Button clickbusiness;
-    private Button clickfoodbusniess;
-    private Button secondStep;
-    private String buslicensephoto;//工商经营许可证
-    private String foodbuslicensephoto;//食品经营许可证存储地址
+public class Step3Activity extends AppCompatActivity implements Step3View{
     private Merchant merchant = new Merchant();
-    Step2Presenter step2Presenter = new Step2Presenter(Step2Activity.this);
+    TextView title;
+    ImageView idcard;
+    Button click_idcard;
+    EditText name_edit;
+    EditText idcardnumber_edit;
+    Button thrid_step;
+    String idcardphoto;
+    Step3Presenter step3Presenter = new Step3Presenter(Step3Activity.this);
 
-    private static final int CHOOSE_BUSINESS = 1;
-    private static final int CHOOSE_FOOD=2;
+    private static final int CHOOSE_IDCARD=3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_step2);
+        setContentView(R.layout.activity_step3);
         initView();
     }
 
@@ -63,51 +54,28 @@ public class Step2Activity extends AppCompatActivity implements Step2View{
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         title=findViewById(R.id.title);
-        title.setText("第二步");
-        business = findViewById(R.id.business);
-        foodbusiness = findViewById(R.id.foodbusiness);
-        clickbusiness = findViewById(R.id.click_business);
-        clickbusiness.setOnClickListener(new View.OnClickListener() {
+        title.setText("第三步");
+        idcard = findViewById(R.id.idcard);
+        click_idcard = findViewById(R.id.click_idcard);
+        //上传身份证
+        click_idcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //权限判断
-                if (ContextCompat.checkSelfPermission(Step2Activity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
-                        PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(Step2Activity.this,
-                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                } else {
-                    //打开相册
-                    openAlbum(CHOOSE_BUSINESS);
-                }
+                openAlbum(CHOOSE_IDCARD);
             }
         });
-        clickfoodbusniess = findViewById(R.id.click_foodbusiness);
-        clickfoodbusniess.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //权限判断
-                if (ContextCompat.checkSelfPermission(Step2Activity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
-                        PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(Step2Activity.this,
-                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                } else {
-                    //打开相册
-                    openAlbum(CHOOSE_FOOD);
-                }
-            }
-        });
-        secondStep = findViewById(R.id.second_step);
-        secondStep.setOnClickListener(new View.OnClickListener() {
+        name_edit = findViewById(R.id.name_edit);
+        idcardnumber_edit = findViewById(R.id.idcardnumber_edit);
+        thrid_step = findViewById(R.id.third_step);
+        thrid_step.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String requestURL = GlobalParameter.URL + "UploadImage";
-                //上传图片
-                File buslicense= new File(buslicensephoto);
-                File foodbuslicense = new File(foodbuslicensephoto);
-                UploadUtil.uploadFile(buslicense, requestURL,merchant);
-                UploadUtil.uploadFile(foodbuslicense,requestURL,merchant);
-                //图片信息传送
-                step2Presenter.sendImage(buslicense.getName(), foodbuslicense.getName(), merchant);
+                //上传身份证
+                File idcardfile= new File(idcardphoto);
+                UploadUtil.uploadFile(idcardfile, requestURL,merchant);
+                //身份证信息传送
+                step3Presenter.sendImage(String.valueOf(name_edit.getText()),String.valueOf(idcardnumber_edit.getText()), merchant,idcardfile.getName());
             }
         });
     }
@@ -115,49 +83,17 @@ public class Step2Activity extends AppCompatActivity implements Step2View{
     private void openAlbum(int FLAG) {
         Intent intent = new Intent("android.intent.action.GET_CONTENT");
         intent.setType("image/*");
-        startActivityForResult(intent, FLAG);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case 1:
-                if (grantResults.length > 0) {
-                    for (int result : grantResults) {
-                        if (result != PackageManager.PERMISSION_GRANTED) {
-                            Toast.makeText(this, "必须同意权限才能使用该程序", Toast.LENGTH_SHORT).
-                                    show();
-                            finish();
-                            return;
-                        }
-                    }
-                } else {
-                    Toast.makeText(this, "发生未知错误", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            default:
-                break;
-        }
-
-
+        startActivityForResult(intent,FLAG);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            case CHOOSE_BUSINESS:
+            case CHOOSE_IDCARD:
                 if (resultCode == RESULT_OK) {
                     //判断手机系统版本号
                     if (Build.VERSION.SDK_INT >= 19) {
-                        handleImageOnKitKat(data,CHOOSE_BUSINESS);
-                    }
-                }
-                break;
-            case CHOOSE_FOOD:
-                if (resultCode == RESULT_OK) {
-                    //判断手机系统版本号
-                    if (Build.VERSION.SDK_INT >= 19) {
-                        handleImageOnKitKat(data,CHOOSE_FOOD);
+                        handleImageOnKitKat(data,CHOOSE_IDCARD);
                     }
                 }
                 break;
@@ -165,9 +101,8 @@ public class Step2Activity extends AppCompatActivity implements Step2View{
                 break;
         }
     }
-
     @TargetApi(19)
-    private void handleImageOnKitKat(Intent data,int FLAG) {
+    private void handleImageOnKitKat(Intent data, int FLAG) {
         String imagePath = null;
         Uri uri = data.getData();
         if (DocumentsContract.isDocumentUri(this, uri)) {
@@ -196,13 +131,9 @@ public class Step2Activity extends AppCompatActivity implements Step2View{
         if (imagePath != null) {
             bitmap=zoomIn(imagePath);//缩小照片
             switch (FLAG) {
-                case CHOOSE_BUSINESS:
-                    buslicensephoto = imagePath;
-                    business.setImageBitmap(bitmap);
-                    break;
-                case CHOOSE_FOOD:
-                    foodbuslicensephoto = imagePath;
-                    foodbusiness.setImageBitmap(bitmap);
+                case CHOOSE_IDCARD:
+                   idcardphoto = imagePath;
+                    idcard.setImageBitmap(bitmap);
                     break;
                 default:
                     break;
@@ -222,8 +153,8 @@ public class Step2Activity extends AppCompatActivity implements Step2View{
 
         iw = option.outWidth;
         ih = option.outHeight;
-        vw = business.getWidth();
-        vh = business.getHeight();//根据身份证尺寸计算
+        vw = idcard.getWidth();
+        vh =idcard.getHeight();//根据身份证尺寸计算
 
         int scaleFactor = Math.min(iw / vw, ih / vh);//计算缩小比率
 
@@ -248,10 +179,10 @@ public class Step2Activity extends AppCompatActivity implements Step2View{
     }
 
     @Override
-    public void finishStep2(Merchant merchant) {
-        Intent intent = new Intent(Step2Activity.this, Step3Activity.class);
+    public void finishStep3(Merchant merchant) {
+        //Toast.makeText(Step3Activity.this, "您已经填写完成所有信息，请等待审核!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(Step3Activity.this, MainActivity.class);
         intent.putExtra("merchant",merchant);
         startActivity(intent);
     }
 }
-
