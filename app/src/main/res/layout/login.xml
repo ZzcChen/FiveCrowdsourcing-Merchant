@@ -12,6 +12,7 @@
         layout="@layout/title_layout" />
 
     <LinearLayout
+        android:id="@+id/ll_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/main_title"
@@ -41,6 +42,7 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:layout_below="@+id/ll_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" >
@@ -60,8 +62,10 @@
 
         <TextView
             android:id="@+id/login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="20dip"
+
             android:layout_below="@+id/input_layout"
             android:layout_centerInParent="true"
             android:layout_marginTop="15dip"
@@ -71,9 +75,9 @@
             android:paddingLeft="25dip"
             android:paddingRight="25dip"
             android:paddingTop="2dip"
-            android:text="Login"
+            android:text="登录"
             android:textColor="#ffffff"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </RelativeLayout>
 
 </RelativeLayout>

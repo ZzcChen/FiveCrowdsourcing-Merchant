@@ -7,14 +7,11 @@ import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,12 +21,13 @@ import com.example.administrator.fivecrowdsourcing_merchant.R;
 import com.example.administrator.fivecrowdsourcing_merchant.model.GlobalParameter;
 import com.example.administrator.fivecrowdsourcing_merchant.model.Merchant;
 import com.example.administrator.fivecrowdsourcing_merchant.presenter.LoginPresenter;
-import com.githang.statusbar.StatusBarCompat;
+
+import java.util.concurrent.Executors;
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
-    public static String  URL=  GlobalParameter.URL;
+    public static String URL = GlobalParameter.URL;
     private TextView login;
-    private LoginPresenter loginPresenter=new LoginPresenter(this);
+    private LoginPresenter loginPresenter = new LoginPresenter(this);
     private EditText phone;
     private EditText password;
     private View progress;
@@ -39,40 +37,35 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     private float mWidth, mHeight;
 
     private LinearLayout mPhone, mPsw;
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_login);
+//      setContentView(R.layout.activity_login);
         setContentView(R.layout.login);
         initView();
     }
+
     /**
      * 输入框的动画效果
      *
-     * @param view
-     *            控件
-     * @param w
-     *            宽
-     * @param h
-     *            高
+     * @param view 控件
+     * @param w    宽
+     * @param h    高
      */
     private void inputAnimator(final View view, float w, float h) {
 
         AnimatorSet set = new AnimatorSet();
 
         ValueAnimator animator = ValueAnimator.ofFloat(0, w);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float value = (Float) animation.getAnimatedValue();
-                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view
-                        .getLayoutParams();
-                params.leftMargin = (int) value;
-                params.rightMargin = (int) value;
-                view.setLayoutParams(params);
-            }
+        animator.addUpdateListener(animation -> {
+            float value = (Float) animation.getAnimatedValue();
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view
+                    .getLayoutParams();
+            params.leftMargin = (int) value;
+            params.rightMargin = (int) value;
+            view.setLayoutParams(params);
         });
 
         ObjectAnimator animator2 = ObjectAnimator.ofFloat(mInputLayout,
@@ -132,63 +125,66 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
 
     private void initView() {
+
+
         progress = findViewById(R.id.layout_progress);
         mInputLayout = findViewById(R.id.input_layout);
-        mPhone= findViewById(R.id.input_layout_phone);
-        mPsw= findViewById(R.id.input_layout_psw);
+        mPhone = findViewById(R.id.input_layout_phone);
+        mPsw = findViewById(R.id.input_layout_psw);
+
         login = findViewById(R.id.login);
         phone = findViewById(R.id.phone);
-        password = findViewById(R.id.password);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // 计算出控件的高与宽
-                mWidth = login.getMeasuredWidth();
-                mHeight = login.getMeasuredHeight();
-                // 隐藏输入框
-                mPhone.setVisibility(View.INVISIBLE);
-                mPsw.setVisibility(View.INVISIBLE);
-                inputAnimator(mInputLayout, mWidth, mHeight);
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(3000);//休眠3秒
-                            loginPresenter.Login(String.valueOf(phone.getText()),password.getText().toString(),URL);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
 
-                    }
-                }).start();
-            }
+        password = findViewById(R.id.password);
+        login.setOnClickListener(view -> {
+            // 计算出控件的高与宽
+            mWidth = login.getMeasuredWidth();
+            mHeight = login.getMeasuredHeight();
+            // 隐藏输入框
+            mPhone.setVisibility(View.INVISIBLE);
+            mPsw.setVisibility(View.INVISIBLE);
+            inputAnimator(mInputLayout, mWidth, mHeight);
+            Executors.newSingleThreadExecutor().submit(() -> {
+                try {
+                    Thread.sleep(3000);//休眠3秒
+                    loginPresenter.Login(String.valueOf(phone.getText()), password.getText().toString(), URL);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+
         });
     }
 
     @Override
     public void onSuccess(Merchant merchant) {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.putExtra("merchant",merchant);
+        intent.putExtra("merchant", merchant);
         startActivity(intent);
     }
 
     @Override
     public void onFailed() {
-        progress.setVisibility(View.GONE);
-        mInputLayout.setVisibility(View.VISIBLE);
-        mPhone.setVisibility(View.VISIBLE);
-        mPsw.setVisibility(View.VISIBLE);
+        runOnUiThread(() -> {
+            Toast.makeText(this,"登录失败",Toast.LENGTH_SHORT).show();
 
-        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mInputLayout.getLayoutParams();
-        params.leftMargin = 0;
-        params.rightMargin = 0;
-        mInputLayout.setLayoutParams(params);
+            progress.setVisibility(View.GONE);
+            mInputLayout.setVisibility(View.VISIBLE);
+            mPhone.setVisibility(View.VISIBLE);
+            mPsw.setVisibility(View.VISIBLE);
+
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mInputLayout.getLayoutParams();
+            params.leftMargin = 0;
+            params.rightMargin = 0;
+            mInputLayout.setLayoutParams(params);
 
 
-        ObjectAnimator animator2 = ObjectAnimator.ofFloat(mInputLayout, "scaleX", 0.5f, 1f);
-        animator2.setDuration(500);
-        animator2.setInterpolator(new AccelerateDecelerateInterpolator());
-        animator2.start();
-            }
+            ObjectAnimator animator2 = ObjectAnimator.ofFloat(mInputLayout, "scaleX", 0.5f, 1f);
+            animator2.setDuration(500);
+            animator2.setInterpolator(new AccelerateDecelerateInterpolator());
+            animator2.start();
+        });
+
+    }
 
 }

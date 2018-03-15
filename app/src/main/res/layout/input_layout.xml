@@ -41,7 +41,7 @@
             android:layout_height="1px"
             android:layout_marginBottom="5dip"
             android:layout_marginTop="5dip"
-            android:background="#eeeeee" />
+            android:background="#6F6F6F" />
 
         <LinearLayout
             android:id="@+id/input_layout_psw"
