@@ -1,13 +1,10 @@
 package com.example.administrator.fivecrowdsourcing_merchant.view;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,17 +14,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.administrator.fivecrowdsourcing_merchant.R;
+import com.example.administrator.fivecrowdsourcing_merchant.adapter.MyFragmentAdapter;
+import com.example.administrator.fivecrowdsourcing_merchant.fragment.PendingGoodFragment;
+import com.example.administrator.fivecrowdsourcing_merchant.fragment.PendingOrderFragment;
+import com.example.administrator.fivecrowdsourcing_merchant.fragment.SendingOrderFragment;
 import com.example.administrator.fivecrowdsourcing_merchant.model.Merchant;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private TextView phone;
     private TextView name;
     private TextView title;
+    private TabLayout mTabLayout;
+    private ViewPager mViewpager;
+
+    private final String[] modules = {"待接单", "待取货","配送中", "已完成"};
+    private List<Fragment> mFragments;
     //private static final int SHOW_MERCHANT=1;//显示商家联系人信息
     Merchant merchant=new Merchant();
 
@@ -38,9 +46,20 @@ public class MainActivity extends AppCompatActivity
         //获得商家信息
         merchant= (Merchant) getIntent().getSerializableExtra("merchant");
         String name=merchant.getName();
+        mFragments = new ArrayList<>();
+        mFragments.add(new PendingOrderFragment());
+        mFragments.add(new PendingGoodFragment());
+        mFragments.add(new SendingOrderFragment());
+        mFragments.add(new PendingOrderFragment());
         initView();
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        mViewpager.setCurrentItem(0);
+//        LocalBroadcastManager.getInstance(getContext()).sendBroadcast(new Intent(BroConstant.PENDING_DELIVERY));
+    }
 
     private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -54,8 +73,22 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        //滑动菜单功能
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        MyFragmentAdapter adapter = new MyFragmentAdapter(getSupportFragmentManager(), mFragments, modules);
+
+        //Tablayout
+        mTabLayout = findViewById(R.id.tab_layout);
+       mViewpager=findViewById(R.id.viewpager);
+        mViewpager.setOffscreenPageLimit(2);
+        mViewpager.setAdapter(adapter);
+        mTabLayout.setupWithViewPager(mViewpager);
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
+       changeTabView(0,0);
+        mViewpager.setCurrentItem(0);
+
 
         //初始化商家信息
         View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_main);
@@ -123,5 +156,22 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void changeTabView(int position, int count) {
+        TabLayout.Tab tab = mTabLayout.getTabAt(position);
+        if (tab != null) {
+            switch (tab.getPosition()) {
+                case 0:
+                    tab.setText(count == 0 ? modules[position] : modules[position] + "(" + count + ")");
+                    break;
+                case 1:
+                    tab.setText(count == 0 ? modules[position] : modules[position] + "(" + count + ")");
+                    break;
+                case 2:
+                    tab.setText(count == 0 ? modules[position] : modules[position] + "(" + count + ")");
+                    break;
+            }
+        }
     }
 }

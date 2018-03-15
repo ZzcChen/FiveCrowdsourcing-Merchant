@@ -38,38 +38,34 @@ public class LoginPresenter {
     }
 
     private void sendRequestWithOkHttp(final String servletIP, final String phone,final String password) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    RequestBody requestBody = new FormBody.Builder().
-                            add("phone", phone).add("password", password).build();
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder().
-                            url(servletIP).
-                            post(requestBody).
-                            build();
-                    Response response = client.newCall(request).execute();
-                    jsonData= response.body().string().toString();
-                    parseJSONWithJONObject(jsonData);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+        try {
+            RequestBody requestBody = new FormBody.Builder().
+                    add("phone", phone).add("password", password).build();
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder().
+                    url(servletIP).
+                    post(requestBody).
+                    build();
+            Response response = client.newCall(request).execute();
+            jsonData = response.body().string().toString();
+            parseJSONWithJONObject(jsonData);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
     private void parseJSONWithJONObject(String jsonData) {
         try {
             JSONObject jsonObject = new JSONObject(jsonData);
-            merchant.setPhone(jsonObject .getString("phone"));
-            merchant.setName(jsonObject .getString("name"));
-            merchant.setMerchantid(jsonObject.getLong("merchantid"));
             result=jsonObject.getString("result");
             if(result.equals("success")){
+                merchant.setPhone(jsonObject .getString("phone"));
+                merchant.setName(jsonObject .getString("name"));
+                merchant.setMerchantid(jsonObject.getLong("merchantid"));
                 loginView.onSuccess(merchant);
-            }
+            }else
+                loginView.onFailed();
         } catch (JSONException e) {
             e.printStackTrace();
         }

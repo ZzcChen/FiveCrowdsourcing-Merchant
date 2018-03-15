@@ -1,0 +1,92 @@
+package com.example.administrator.fivecrowdsourcing_merchant.view;
+
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
+
+import com.example.administrator.fivecrowdsourcing_merchant.adapter.BaseViewHolder;
+
+/**
+ * Created by Administrator on 2018/3/10.
+ */
+
+public abstract class LoadMoreView {
+    public static final int STATUS_DEFAULT = 1;
+    public static final int STATUS_LOADING = 2;
+    public static final int STATUS_FAIL = 3;
+    public static final int STATUS_END = 4;
+
+    private int mLoadMoreStatus = STATUS_DEFAULT;
+    private boolean mLoadMoreEndGone = false;
+
+    public void setLoadMoreStatus(int loadMoreStatus) {
+        this.mLoadMoreStatus = loadMoreStatus;
+    }
+
+    public int getLoadMoreStatus() {
+        return mLoadMoreStatus;
+    }
+
+    public void convert(BaseViewHolder holder) {
+        switch (mLoadMoreStatus) {
+            case STATUS_LOADING:
+                visibleLoading(holder, true);
+                visibleLoadFail(holder, false);
+                visibleLoadEnd(holder, false);
+                break;
+            case STATUS_FAIL:
+                visibleLoading(holder, false);
+                visibleLoadFail(holder, true);
+                visibleLoadEnd(holder, false);
+                break;
+            case STATUS_END:
+                visibleLoading(holder, false);
+                visibleLoadFail(holder, false);
+                visibleLoadEnd(holder, true);
+                break;
+            case STATUS_DEFAULT:
+                visibleLoading(holder, false);
+                visibleLoadFail(holder, false);
+                visibleLoadEnd(holder, false);
+                break;
+        }
+    }
+
+    private void visibleLoading(BaseViewHolder holder, boolean visible) {
+        holder.setVisible(getLoadingViewId(), visible);
+    }
+
+    private void visibleLoadFail(BaseViewHolder holder, boolean visible) {
+        holder.setVisible(getLoadFailViewId(), visible);
+    }
+
+    private void visibleLoadEnd(BaseViewHolder holder, boolean visible) {
+        final int loadEndViewId=getLoadEndViewId();
+        if (loadEndViewId != 0) {
+            holder.setVisible(loadEndViewId, visible);
+        }
+    }
+
+    public final void setLoadMoreEndGone(boolean loadMoreEndGone) {
+        this.mLoadMoreEndGone = loadMoreEndGone;
+    }
+
+    public final boolean isLoadEndMoreGone() {
+        return getLoadEndViewId() == 0 || mLoadMoreEndGone;
+    }
+
+
+    @Deprecated
+    public boolean isLoadEndGone(){return mLoadMoreEndGone;}
+
+    public abstract @LayoutRes
+    int getLayoutId();
+
+    protected abstract @IdRes
+    int getLoadingViewId();
+
+    protected abstract @IdRes
+    int getLoadFailViewId();
+
+    protected abstract @IdRes
+    int getLoadEndViewId();
+}

@@ -63,9 +63,14 @@
             android:name=".view.Step2Activity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.Step3Activity"
+        <activity
+            android:name=".view.Step3Activity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.TrackActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

@@ -11,4 +11,6 @@ public interface LoginView {
      * 登陆成功
      */
     void onSuccess(Merchant merchant);
+
+    void onFailed();
 }
