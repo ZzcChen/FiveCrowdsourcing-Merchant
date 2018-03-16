@@ -46,11 +46,13 @@ public class MainActivity extends AppCompatActivity
         //获得商家信息
         merchant= (Merchant) getIntent().getSerializableExtra("merchant");
         String name=merchant.getName();
+//        Bundle args = new Bundle();
+//        args.putSerializable("PendingOrder", merchant);
         mFragments = new ArrayList<>();
-        mFragments.add(new PendingOrderFragment());
+        mFragments.add(new PendingOrderFragment(merchant));
         mFragments.add(new PendingGoodFragment());
         mFragments.add(new SendingOrderFragment());
-        mFragments.add(new PendingOrderFragment());
+//        mFragments.add(new PendingOrderFragment());
         initView();
     }
 

@@ -1,10 +1,12 @@
 package com.example.administrator.fivecrowdsourcing_merchant.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2018/3/10.
  */
 
-public class DeliveryOrder {
+public class DeliveryOrder implements Serializable {
     private Long delorderid;//配送单id
     private Long merchantid;//商户id
     private Long delmethodid;//配送方式id
@@ -24,6 +26,10 @@ public class DeliveryOrder {
     private String cusAddress;//客户地址
     private String things;//内容
     private int status;//状态：1：新建；2：待抢单；3：待取单；4：配送中；5：配送完成
+    private double cuslat;//客户纬度
+    private double cuslog;//客户经度
+    private String storeName;//商店名
+    private  String storeAddress;//商店地址
 
     public DeliveryOrder() {
     }
@@ -200,5 +206,37 @@ public class DeliveryOrder {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public double getCuslat() {
+        return cuslat;
+    }
+
+    public void setCuslat(double cuslat) {
+        this.cuslat = cuslat;
+    }
+
+    public double getCuslog() {
+        return cuslog;
+    }
+
+    public void setCuslog(double cuslog) {
+        this.cuslog = cuslog;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
+    public String getStoreAddress() {
+        return storeAddress;
+    }
+
+    public void setStoreAddress(String storeAddress) {
+        this.storeAddress = storeAddress;
     }
 }

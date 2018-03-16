@@ -63,6 +63,9 @@ public class LoginPresenter {
                 merchant.setPhone(jsonObject .getString("phone"));
                 merchant.setName(jsonObject .getString("name"));
                 merchant.setMerchantid(jsonObject.getLong("merchantid"));
+                merchant.setStorename(jsonObject.getString("storename"));
+                merchant.setAddress(jsonObject.getString("address"));
+                merchant.setMargin(jsonObject.getLong("margin"));
                 loginView.onSuccess(merchant);
             }else
                 loginView.onFailed();
