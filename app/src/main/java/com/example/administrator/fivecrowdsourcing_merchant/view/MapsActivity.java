@@ -3,6 +3,7 @@ package com.example.administrator.fivecrowdsourcing_merchant.view;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -156,12 +157,17 @@ public class MapsActivity  extends AppCompatActivity {
         //移动到我的位置
         private void navigateTo(BDLocation bdLocation) {
             if (isFirstLocate) {
-                com.baidu.mapapi.model.LatLng ll = new com.baidu.mapapi.model.LatLng(bdLocation.getLatitude(), bdLocation.getLongitude());
+                com.baidu.mapapi.model.LatLng ll = new com.baidu.mapapi.model.LatLng(bdLocation.getLatitude(),bdLocation.getLongitude());
                 MapStatusUpdate update = MapStatusUpdateFactory.zoomTo(16f);
                 baiduMap.animateMapStatus(update);
-                update = MapStatusUpdateFactory.newLatLng(ll);
-                baiduMap.animateMapStatus(update);
                 isFirstLocate = false;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(ll);
+                        baiduMap.animateMapStatus(update);
+                    }
+                }, 400);    //延时1s执行
             }
             MyLocationData.Builder locationbuilder = new MyLocationData.Builder();
             locationbuilder.latitude(bdLocation.getLatitude());
