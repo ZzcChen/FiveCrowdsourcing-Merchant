@@ -66,6 +66,8 @@ public class LoginPresenter {
                 merchant.setStorename(jsonObject.getString("storename"));
                 merchant.setAddress(jsonObject.getString("address"));
                 merchant.setMargin(jsonObject.getLong("margin"));
+                merchant.setLongitude(jsonObject.getDouble("longitude"));
+                merchant.setLatitude(jsonObject.getDouble("latitude"));
                 loginView.onSuccess(merchant);
             }else
                 loginView.onFailed();

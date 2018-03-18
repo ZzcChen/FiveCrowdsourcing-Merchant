@@ -30,6 +30,8 @@ public class DeliveryOrder implements Serializable {
     private double cuslog;//客户经度
     private String storeName;//商店名
     private  String storeAddress;//商店地址
+    private double storeLat;//商店纬度
+    private double storeLog;//商店经度
 
     public DeliveryOrder() {
     }
@@ -238,5 +240,21 @@ public class DeliveryOrder implements Serializable {
 
     public void setStoreAddress(String storeAddress) {
         this.storeAddress = storeAddress;
+    }
+
+    public double getStoreLat() {
+        return storeLat;
+    }
+
+    public void setStoreLat(double storeLat) {
+        this.storeLat = storeLat;
+    }
+
+    public double getStoreLog() {
+        return storeLog;
+    }
+
+    public void setStoreLog(double storeLog) {
+        this.storeLog = storeLog;
     }
 }

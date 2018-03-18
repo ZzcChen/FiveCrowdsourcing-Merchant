@@ -31,13 +31,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     private EditText phone;
     private EditText password;
     private View progress;
-
     private View mInputLayout;
-
     private float mWidth, mHeight;
-
     private LinearLayout mPhone, mPsw;
-
+    private TextView gotoRegister;
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,6 +150,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                 }
             });
 
+        });
+        gotoRegister = findViewById(R.id.gotoRegister);
+        gotoRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
         });
     }
 

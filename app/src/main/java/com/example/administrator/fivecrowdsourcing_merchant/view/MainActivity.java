@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity
 //        args.putSerializable("PendingOrder", merchant);
         mFragments = new ArrayList<>();
         mFragments.add(new PendingOrderFragment(merchant));
-        mFragments.add(new PendingGoodFragment());
-        mFragments.add(new SendingOrderFragment());
+        mFragments.add(new PendingGoodFragment(merchant));
+        mFragments.add(new SendingOrderFragment(merchant));
 //        mFragments.add(new PendingOrderFragment());
         initView();
     }

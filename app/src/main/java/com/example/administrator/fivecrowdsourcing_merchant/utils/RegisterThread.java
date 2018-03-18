@@ -1,4 +1,6 @@
-package com.example.administrator.fivecrowdsourcing_merchant;
+package com.example.administrator.fivecrowdsourcing_merchant.utils;
+
+import com.example.administrator.fivecrowdsourcing_merchant.view.RegisterView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,17 +17,19 @@ public class RegisterThread extends Thread {
     String url;
     String phone;
     String password;
+    private RegisterView registerView;
 
     public RegisterThread() {
     }
 
-    public RegisterThread(String url, String phone, String password) {
+    public RegisterThread(String url, String phone, String password,RegisterView registerView) {
         this.url = url;
         this.phone = phone;
         this.password = password;
+        this.registerView = registerView;
     }
 
-    private void doGet() throws IOException {
+    private String doGet() throws IOException {
         /*将username和password传给Tomcat服务器*/
         url=url+"?phone="+phone+"&password="+password;
         try {
@@ -44,11 +48,11 @@ public class RegisterThread extends Thread {
             {
                 sb.append(str);
             }
-            //把服务端返回的数据打印出来
-            System.out.println("result"+sb.toString());
+            return sb.toString();
         } catch (MalformedURLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            return "false";
         }
 
     }
@@ -57,7 +61,10 @@ public class RegisterThread extends Thread {
     @Override
     public void run() {
         try {
-            doGet();
+          String result =doGet();
+          if(result.equals("success")){
+              registerView.onSuccess();
+          }
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

@@ -166,8 +166,8 @@ public class TrackActivity extends AppCompatActivity {
         //创建OverlayOptions的集合
         List<OverlayOptions> options = new ArrayList<OverlayOptions>();
         //设置坐标点
-        LatLng point1 = new LatLng(30.22683, 120.04254);
-        LatLng point2 = new LatLng(30.224053, 120.038268);
+        LatLng point2 = new LatLng(deliveryOrder.getCuslat(), deliveryOrder.getCuslog());
+        LatLng point1 = new LatLng(deliveryOrder.getStoreLat(), deliveryOrder.getCuslog());
        //创建OverlayOptions属性
         //构建Marker图标
         BitmapDescriptor startbitmap = BitmapDescriptorFactory

@@ -1,5 +1,6 @@
 package com.example.administrator.fivecrowdsourcing_merchant.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,8 @@ import com.example.administrator.fivecrowdsourcing_merchant.adapter.PendingGoodA
 import com.example.administrator.fivecrowdsourcing_merchant.adapter.PullToRefreshAdapter;
 import com.example.administrator.fivecrowdsourcing_merchant.adapter.SendingOrderAdapter;
 import com.example.administrator.fivecrowdsourcing_merchant.model.DeliveryOrder;
+import com.example.administrator.fivecrowdsourcing_merchant.model.Merchant;
+import com.example.administrator.fivecrowdsourcing_merchant.presenter.SendingOrderPresenter;
 import com.example.administrator.fivecrowdsourcing_merchant.view.LoginActivity;
 import com.example.administrator.fivecrowdsourcing_merchant.view.MainActivity;
 import com.example.administrator.fivecrowdsourcing_merchant.view.TrackActivity;
@@ -30,11 +33,14 @@ import java.util.List;
  * Created by Administrator on 2018/3/13.
  */
 
+@SuppressLint("ValidFragment")
 public class SendingOrderFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeLayout;
+    private Merchant merchant;
 
     private PullToRefreshAdapter mPendingAdapter;//刷新适配器
+    private SendingOrderPresenter sendingOrderPresenter=new SendingOrderPresenter(this);
 
     private String mUserToken;
     private String mUserId;
@@ -42,6 +48,11 @@ public class SendingOrderFragment extends Fragment {
     private boolean mBroFlag = false;
     private List<DeliveryOrder> orderList;
     private DeliveryOrder mMyOrders;
+
+    @SuppressLint("ValidFragment")
+    public SendingOrderFragment(Merchant merchant) {
+        this.merchant = merchant;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,9 +68,10 @@ public class SendingOrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sending_order, container, false);
         mRecyclerView = view.findViewById(R.id.pending_rv_list_sending);
+        sendingOrderPresenter.dispalyInitOrder(merchant);
 //        mSwipeLayout = view.findViewById(R.id.pending_swipeLayout);
-        initData();
-        initAdapter();
+//        initData();
+//        initAdapter();
         return view;
     }
 
@@ -85,5 +97,20 @@ public class SendingOrderFragment extends Fragment {
         Intent intent = new Intent(getActivity(), TrackActivity.class);
         intent.putExtra("deliveryOrder",deliveryOrder);
         startActivity(intent);
+    }
+
+    public void dispalyOrder(List<DeliveryOrder> deliveryOrderList) {
+        getActivity().runOnUiThread(() -> {
+            for(int i=0;i<deliveryOrderList.size();i++) {
+                deliveryOrderList.get(i).setStoreAddress(merchant.getAddress());
+                deliveryOrderList.get(i).setStoreName(merchant.getStorename());
+                deliveryOrderList.get(i).setStoreLat(merchant.getLatitude());
+                deliveryOrderList.get(i).setStoreLog(merchant.getLongitude());
+            }
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+            mRecyclerView.setLayoutManager(layoutManager);
+            SendingOrderAdapter adpater = new SendingOrderAdapter(deliveryOrderList,this);
+            mRecyclerView.setAdapter(adpater);
+        });
     }
 }

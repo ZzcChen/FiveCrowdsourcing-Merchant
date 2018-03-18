@@ -29,7 +29,7 @@
             android:value="ANfcfEpZxE64eDWvKGH9eBx8Md0jXRT5" />
 
         <activity
-            android:name=".RegisterActivity"
+            android:name=".view.RegisterActivity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

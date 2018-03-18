@@ -30,43 +30,41 @@ public class SendingOrderAdapter  extends RecyclerView.Adapter<SendingOrderAdapt
 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView startdistance;
-        TextView startCity;
-        TextView startAddress;
-        TextView enddistance;
-        TextView endCity;
-        TextView endAddress;
-        Button trackRunner;
+        TextView storeName;
+        TextView storeAddress;
+        TextView cusAddress;
+        TextView estimatedPrice;
+        TextView estimatedTime;
+        Button pendingGood;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            startdistance = itemView.findViewById(R.id.order_start_distance);
-            startCity = itemView.findViewById(R.id.order_start_city);
-            startAddress = itemView.findViewById(R.id.order_start_point);
-            enddistance = itemView.findViewById(R.id.order_end_distance);
-            endCity = itemView.findViewById(R.id.order_end_city);
-            endAddress = itemView.findViewById(R.id.order_end_point);
-            trackRunner = itemView.findViewById(R.id.item_get_order);
+            storeName= itemView.findViewById(R.id.shopName);
+            storeAddress = itemView.findViewById(R.id.storeAddress);
+            cusAddress = itemView.findViewById(R.id.cusAddress);
+            estimatedPrice = itemView.findViewById(R.id.estimatedPrice);
+            estimatedTime = itemView.findViewById(R.id.estimatedTime);
+            pendingGood = itemView.findViewById(R.id.item_get_order_orderpending);
         }
     }
     @Override
     public SendingOrderAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_animation, parent, false);
-        SendingOrderAdapter.ViewHolder holder = new SendingOrderAdapter.ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_pending ,parent, false);
+        ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(SendingOrderAdapter.ViewHolder holder, int position) {
         DeliveryOrder deliveryOrder = orderList.get(position);
-        holder.startdistance.setText("0.2km");
-        holder.startAddress.setText("垃圾街");
-        holder.startCity.setText("杭州");
-        holder.enddistance.setText("2km");
-        holder.endAddress.setText("东十五");
-        holder.startCity.setText("杭州");
+        holder.storeName.setText(deliveryOrder.getStoreName());
+        holder.storeAddress.setText(deliveryOrder.getStoreAddress());
+        holder.cusAddress.setText(deliveryOrder.getCusAddress());
+        holder.estimatedTime.setText(deliveryOrder.getEstimatedtime()+"分钟");
+        holder.estimatedPrice.setText(deliveryOrder.getEstimatedtotalprice()+"元");
+        holder.pendingGood.setText("实时监控");
         //跟踪跑腿人路径
-        holder.trackRunner.setOnClickListener(new View.OnClickListener() {
+        holder.pendingGood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendingOrderFragment.showRunnerTrack(deliveryOrder);
