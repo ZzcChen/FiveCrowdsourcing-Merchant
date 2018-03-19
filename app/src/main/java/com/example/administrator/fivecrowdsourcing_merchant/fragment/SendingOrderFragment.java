@@ -3,6 +3,7 @@ package com.example.administrator.fivecrowdsourcing_merchant.fragment;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -34,7 +35,7 @@ import java.util.List;
  */
 
 @SuppressLint("ValidFragment")
-public class SendingOrderFragment extends Fragment {
+public class SendingOrderFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeLayout;
     private Merchant merchant;
@@ -68,6 +69,9 @@ public class SendingOrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sending_order, container, false);
         mRecyclerView = view.findViewById(R.id.pending_rv_list_sending);
+        mSwipeLayout = view.findViewById(R.id.pending_swipeLayout_sending);
+        mSwipeLayout.setColorSchemeResources(new int[]{R.color.colorAccent, R.color.colorPrimary});
+        mSwipeLayout.setOnRefreshListener(this);
         sendingOrderPresenter.dispalyInitOrder(merchant);
 //        mSwipeLayout = view.findViewById(R.id.pending_swipeLayout);
 //        initData();
@@ -75,23 +79,6 @@ public class SendingOrderFragment extends Fragment {
         return view;
     }
 
-    private void initAdapter() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(layoutManager);
-        SendingOrderAdapter adpater = new SendingOrderAdapter(orderList,this);
-        mRecyclerView.setAdapter(adpater);
-    }
-
-    private void initData() {
-        orderList = new ArrayList<DeliveryOrder>();
-        for (int i = 0; i < 2; i++) {
-            DeliveryOrder order = new DeliveryOrder();
-            order.setCuslat(30.225809);
-            order.setCuslog(120.03688);
-            orderList.add(order);
-        }
-
-    }
 
     public void showRunnerTrack(DeliveryOrder deliveryOrder) {
         Intent intent = new Intent(getActivity(), TrackActivity.class);
@@ -112,5 +99,17 @@ public class SendingOrderFragment extends Fragment {
             SendingOrderAdapter adpater = new SendingOrderAdapter(deliveryOrderList,this);
             mRecyclerView.setAdapter(adpater);
         });
+    }
+
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                sendingOrderPresenter.dispalyInitOrder(merchant);
+                // 加载完数据设置为不刷新状态，将下拉进度收起来
+                mSwipeLayout.setRefreshing(false);
+            }
+        }, 2000);
     }
 }

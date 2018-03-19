@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.administrator.fivecrowdsourcing_merchant.R;
 import com.example.administrator.fivecrowdsourcing_merchant.adapter.MyFragmentAdapter;
+import com.example.administrator.fivecrowdsourcing_merchant.fragment.CompletedOrderFragment;
 import com.example.administrator.fivecrowdsourcing_merchant.fragment.PendingGoodFragment;
 import com.example.administrator.fivecrowdsourcing_merchant.fragment.PendingOrderFragment;
 import com.example.administrator.fivecrowdsourcing_merchant.fragment.SendingOrderFragment;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity
         mFragments.add(new PendingOrderFragment(merchant));
         mFragments.add(new PendingGoodFragment(merchant));
         mFragments.add(new SendingOrderFragment(merchant));
+        mFragments.add(new CompletedOrderFragment(merchant));
 //        mFragments.add(new PendingOrderFragment());
         initView();
     }

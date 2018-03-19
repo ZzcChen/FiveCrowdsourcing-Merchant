@@ -2,6 +2,7 @@ package com.example.administrator.fivecrowdsourcing_merchant.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -65,6 +66,9 @@ public class PendingGoodFragment extends Fragment implements SwipeRefreshLayout.
         View view = inflater.inflate(R.layout.fragment_pending_good, container, false);
         mRecyclerView = view.findViewById(R.id.pending_rv_list);
         pendingGoodPresenter.dispalyInitOrder(merchant);
+        mSwipeLayout = view.findViewById(R.id.pending_swipeLayout);
+        mSwipeLayout.setColorSchemeResources(new int[]{R.color.colorAccent, R.color.colorPrimary});
+        mSwipeLayout.setOnRefreshListener(this);
 //        mSwipeLayout = view.findViewById(R.id.pending_swipeLayout);
 //        initData();
 //        initAdapter();
@@ -100,7 +104,14 @@ public class PendingGoodFragment extends Fragment implements SwipeRefreshLayout.
 
     @Override
     public void onRefresh() {
-
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                pendingGoodPresenter.dispalyInitOrder(merchant);
+                // 加载完数据设置为不刷新状态，将下拉进度收起来
+                mSwipeLayout.setRefreshing(false);
+            }
+        }, 2000);
     }
 
 

@@ -50,7 +50,7 @@ public class TrackActivity extends AppCompatActivity {
         mLocationClient.registerLocationListener(new TrackActivity.MyLocationListener());
         //初始化地图
         SDKInitializer.initialize(getApplicationContext());
-        SDKInitializer.setCoordType(CoordType.GCJ02);
+//        SDKInitializer.setCoordType(CoordType.GCJ02);
         setContentView(R.layout.activity_track);
         intView();
     }
@@ -167,7 +167,7 @@ public class TrackActivity extends AppCompatActivity {
         List<OverlayOptions> options = new ArrayList<OverlayOptions>();
         //设置坐标点
         LatLng point2 = new LatLng(deliveryOrder.getCuslat(), deliveryOrder.getCuslog());
-        LatLng point1 = new LatLng(deliveryOrder.getStoreLat(), deliveryOrder.getCuslog());
+        LatLng point1 = new LatLng(deliveryOrder.getStoreLat(), deliveryOrder.getStoreLog());
        //创建OverlayOptions属性
         //构建Marker图标
         BitmapDescriptor startbitmap = BitmapDescriptorFactory

@@ -6,6 +6,7 @@ package com.example.administrator.fivecrowdsourcing_merchant.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -68,7 +69,9 @@ public class PendingOrderFragment extends Fragment implements SwipeRefreshLayout
         View view = inflater.inflate(R.layout.fragment_pending_order, container, false);
         mRecyclerView = view.findViewById(R.id.pending_oreder_list);
         mSwipeLayout = view.findViewById(R.id.pending_order_swipeLayout);
-        floatingActionButton=view.findViewById(R.id.create_order);
+        mSwipeLayout.setColorSchemeResources(new int[]{R.color.colorAccent, R.color.colorPrimary});
+        mSwipeLayout.setOnRefreshListener(this);
+        floatingActionButton = view.findViewById(R.id.create_order);
         pendingOrderPresenter.dispalyInitOrder(merchant);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +85,7 @@ public class PendingOrderFragment extends Fragment implements SwipeRefreshLayout
         return view;
     }
 
-   //获取订单信息
+    //获取订单信息
     private DeliveryOrder getmMyOrder() {
         DeliveryOrder deliveryOrder = new DeliveryOrder();
         deliveryOrder.setMerchantid(merchant.getMerchantid());
@@ -112,6 +115,7 @@ public class PendingOrderFragment extends Fragment implements SwipeRefreshLayout
 //        mUserId = mBuProcessor.getUserId();
 //        mPresenter.requestPendingOrder(mUserToken, mUserId);
     }
+
     private void initAdapter() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
@@ -142,6 +146,7 @@ public class PendingOrderFragment extends Fragment implements SwipeRefreshLayout
 
         mSwipeLayout.setOnRefreshListener(this);
     }
+
     private void initialize() {
 //        this.getComponent(Main ActivityComponent.class).inject(this);
 //        mPresenter.setView(this);
@@ -150,12 +155,19 @@ public class PendingOrderFragment extends Fragment implements SwipeRefreshLayout
 
     @Override
     public void onRefresh() {
-//        mPresenter.requestPendingOrder(mUserToken, mUserId);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                pendingOrderPresenter.dispalyInitOrder(merchant);
+                // 加载完数据设置为不刷新状态，将下拉进度收起来
+                mSwipeLayout.setRefreshing(false);
+            }
+        }, 2000);
     }
 
     public void dispalyOrder(List<DeliveryOrder> deliveryOrderList) {
         getActivity().runOnUiThread(() -> {
-            for(int i=0;i<deliveryOrderList.size();i++) {
+            for (int i = 0; i < deliveryOrderList.size(); i++) {
                 deliveryOrderList.get(i).setStoreAddress(merchant.getAddress());
                 deliveryOrderList.get(i).setStoreName(merchant.getStorename());
             }

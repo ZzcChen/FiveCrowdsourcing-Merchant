@@ -79,7 +79,7 @@
                         android:layout_below="@id/item_icon"
                         android:layout_marginTop="4dp"
                         android:text="2km"
-                        />
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/order_detail_start_city"
@@ -88,19 +88,9 @@
                         android:layout_marginStart="@dimen/dp_35"
                         android:layout_toEndOf="@id/item_icon"
                         android:maxLines="1"
-                        android:text="上海市浦东新区"
-                        android:visibility="gone"
+                        android:text="西溪医院"
                         android:textSize="@dimen/sp_16"
-                        />
-
-                    <TextView
-                        android:id="@+id/order_detail_start_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/item_icon"
-                        android:layout_marginStart="@dimen/dp_60"
-                        android:text="上海市浦东新区"
-                        />
+                        android:visibility="visible" />
 
                     <View
                         style="@style/LineH_Fill_Height0_5_ForView"
@@ -141,7 +131,7 @@
                         android:layout_below="@id/item_icon2"
                         android:layout_marginTop="4dp"
                         android:text="2km"
-                        />
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/order_detail_end_city"
@@ -149,20 +139,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_35"
                         android:layout_toEndOf="@id/item_icon2"
-                        android:text="上海市浦东新区"
-                        android:visibility="gone"
+                        android:text="杭州市西湖区浙工大XXXX"
                         android:textSize="@dimen/sp_16"
-                        />
+                        android:visibility="visible" />
 
-                    <TextView
-                        android:id="@+id/order_detail_end_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/item_icon2"
-                        android:layout_marginStart="@dimen/dp_60"
-                        android:maxLines="1"
-                        android:text="上海市浦东新区"
-                        />
                 </RelativeLayout>
 
                 <View
@@ -181,6 +161,5 @@
         android:id="@+id/order_detail_button"
         style="@style/Login_Button_Style2"
         android:layout_gravity="bottom"
-        android:text="@string/app_login"
-        />
+        android:text="确认" />
 </LinearLayout>
