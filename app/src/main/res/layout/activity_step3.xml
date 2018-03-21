@@ -1,75 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@color/line_grey_bg"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <include layout="@layout/app_bar_main" />
 
-    <Button
-        android:id="@+id/click_idcard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="上传身份证" />
-
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center_vertical">
+
+        <com.baoyachi.stepview.HorizontalStepView
+            android:id="@+id/step_view1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
 
         <ImageView
             android:id="@+id/idcard"
             android:layout_width="match_parent"
-            android:layout_height="157dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/common_full_open_on_phone" />
-    </LinearLayout>
+            app:srcCompat="@drawable/idcard" />
+
+        <Button
+            android:id="@+id/click_idcard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/idcard"
+
+            android:background="@android:drawable/screen_background_light_transparent"
+            android:visibility="visible" />
+    </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/white"
-        android:gravity="center_vertical">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="71dp"
-            android:layout_height="wrap_content"
-            android:text="姓名" />
-
-        <EditText
-            android:id="@+id/name_edit"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="40dp"
-            android:background="@null"
-            android:textSize="14sp" />
-    </LinearLayout>
+            android:layout_height="50dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:background="@color/white"
+            android:gravity="center_vertical">
 
-    <View style="@style/LineH_Fill_Width1_5_ForView" />
+            <TextView
+                android:layout_width="71dp"
+                android:layout_height="wrap_content"
+                android:text="姓名" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/white"
-        android:gravity="center_vertical">
+            <EditText
+                android:id="@+id/name_edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="40dp"
+                android:background="@null"
+                android:textSize="14sp" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="身份证号码" />
+        <View style="@style/LineH_Fill_Width1_5_ForView" />
 
-        <EditText
-            android:id="@+id/idcardnumber_edit"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="40dp"
-            android:background="@null"
-            android:inputType="number"
-            android:textColorHint="@color/light_grey_dark"
-            android:textSize="14sp" />
+            android:layout_height="50dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:background="@color/white"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="身份证号码" />
+
+            <EditText
+                android:id="@+id/idcardnumber_edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="40dp"
+                android:background="@null"
+                android:inputType="number"
+                android:textColorHint="@color/light_grey_dark"
+                android:textSize="14sp" />
+        </LinearLayout>
     </LinearLayout>
     <Button
         android:id="@+id/third_step"
@@ -77,5 +107,6 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:text="下一步"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@color/colorPrimary"
+        android:visibility="gone" />
 </LinearLayout>

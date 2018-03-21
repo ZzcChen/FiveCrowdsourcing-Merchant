@@ -25,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.baoyachi.stepview.HorizontalStepView;
+import com.baoyachi.stepview.bean.StepBean;
 import com.example.administrator.fivecrowdsourcing_merchant.R;
 import com.example.administrator.fivecrowdsourcing_merchant.model.GlobalParameter;
 import com.example.administrator.fivecrowdsourcing_merchant.model.Merchant;
@@ -34,6 +36,8 @@ import com.example.administrator.fivecrowdsourcing_merchant.presenter.UploadUtil
 import org.w3c.dom.Document;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Step2Activity extends AppCompatActivity implements Step2View{
     private TextView title;
@@ -42,9 +46,11 @@ public class Step2Activity extends AppCompatActivity implements Step2View{
     private Button clickbusiness;
     private Button clickfoodbusniess;
     private Button secondStep;
+    private TextView nextstep;
     private String buslicensephoto;//工商经营许可证
     private String foodbuslicensephoto;//食品经营许可证存储地址
     private Merchant merchant = new Merchant();
+    List<StepBean> stepsBeanList = new ArrayList<>();
     Step2Presenter step2Presenter = new Step2Presenter(Step2Activity.this);
 
     private static final int CHOOSE_BUSINESS = 1;
@@ -54,9 +60,20 @@ public class Step2Activity extends AppCompatActivity implements Step2View{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step2);
+        initData();
         initView();
     }
 
+    private void initData() {
+        StepBean stepBean0 = new StepBean("基本信息",1);
+        StepBean stepBean1 = new StepBean("资质证书",0);
+        StepBean stepBean2 = new StepBean("身份信息",-1);
+        StepBean stepBean3 = new StepBean("完成",-1);
+        stepsBeanList.add(stepBean0);
+        stepsBeanList.add(stepBean1);
+        stepsBeanList.add(stepBean2);
+        stepsBeanList.add(stepBean3);
+    }
     private void initView() {
         //获得商家信息
         merchant= (Merchant) getIntent().getSerializableExtra("merchant");
@@ -64,8 +81,35 @@ public class Step2Activity extends AppCompatActivity implements Step2View{
         setSupportActionBar(toolbar);
         title=findViewById(R.id.title);
         title.setText("第二步");
+        nextstep=findViewById(R.id.next_step);
+        nextstep.setText("下一步");
         business = findViewById(R.id.business);
         foodbusiness = findViewById(R.id.foodbusiness);
+        HorizontalStepView setpview = (HorizontalStepView) findViewById(R.id.step_view1);
+        setpview
+                .setStepViewTexts(stepsBeanList)//总步骤
+                .setTextSize(12)//set textSize
+                .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.colorPrimary))//设置 StepsViewIndicator 完成线的颜色
+                .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.colorAccent))//设置 StepsViewIndicator 未完成线的颜色
+                .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.darkorange))//设置 StepsView text 完成线的颜色
+                .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.colorPrimary))//设置 StepsView text 未完成线的颜色
+                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.complted))//设置 StepsViewIndicator CompleteIcon
+                .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.default_icon))//设置 StepsViewIndicator DefaultIcon
+                .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention));//设置 StepsViewIndicator
+
+//        nextstep.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(Step2Activity.this, Step3Activity.class);
+//                intent.putExtra("merchant",merchant);
+//             //   Toast.makeText(Step2Activity.this, "!", Toast.LENGTH_SHORT).show();
+//                startActivity(intent);
+//               /* startActivity(intent);
+//                //发送商户基本信息
+//                merchantInfoPresenter.sendMerchantInfo(String.valueOf(storename.getText()), String.valueOf(typeofgood.getText()),
+//                        String.valueOf(phone.getText()), String.valueOf(address.getText()),addressInfo.getLatitude(),addressInfo.getLongtitude(),merchant);
+//          */  }
+//        });
         clickbusiness = findViewById(R.id.click_business);
         clickbusiness.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +125,7 @@ public class Step2Activity extends AppCompatActivity implements Step2View{
                 }
             }
         });
+
         clickfoodbusniess = findViewById(R.id.click_foodbusiness);
         clickfoodbusniess.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,8 +141,8 @@ public class Step2Activity extends AppCompatActivity implements Step2View{
                 }
             }
         });
-        secondStep = findViewById(R.id.second_step);
-        secondStep.setOnClickListener(new View.OnClickListener() {
+//        secondStep = findViewById(R.id.second_step);
+        nextstep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String requestURL = GlobalParameter.URL + "UploadImage";
@@ -225,7 +270,7 @@ public class Step2Activity extends AppCompatActivity implements Step2View{
         vw = business.getWidth();
         vh = business.getHeight();//根据身份证尺寸计算
 
-        int scaleFactor = Math.min(iw / vw, ih / vh);//计算缩小比率
+        int scaleFactor = Math.max(iw / vw, ih / vh);//计算缩小比率
 
         option.inJustDecodeBounds = false;//关闭选项
         option.inSampleSize = scaleFactor;//设置缩小比率
@@ -246,6 +291,7 @@ public class Step2Activity extends AppCompatActivity implements Step2View{
         }
         return path;
     }
+
 
     @Override
     public void finishStep2(Merchant merchant) {

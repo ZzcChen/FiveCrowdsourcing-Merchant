@@ -41,6 +41,7 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.google.code.gson:gson:2.8.1'
     compile 'com.githang:status-bar-compat:latest.integration'
+    compile 'com.github.baoyachi:StepView:1.9'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
 }

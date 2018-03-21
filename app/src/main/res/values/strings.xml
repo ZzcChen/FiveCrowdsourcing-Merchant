@@ -60,4 +60,5 @@
     <string name="dialog_tip">请与门店营业员确认取餐单号是否正确</string>
     <string name="main_exit">是否确定退出？</string>
     <string name="work_summary">总计</string>
+    <string name="gongshangzhizhao">工商执照</string>
 </resources>
