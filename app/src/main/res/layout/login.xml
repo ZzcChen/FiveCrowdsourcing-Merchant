@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#66CDAA"
+    android:background="@mipmap/oneplus5t2"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
     <include
         android:id="@+id/main_title"
@@ -16,13 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/main_title"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <ImageView
-            android:layout_width="55dip"
-            android:layout_height="55dip"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
-            android:src="@mipmap/ic_launcher_round" />
+            android:src="@mipmap/ic_launcher_round"
+            android:visibility="visible" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -32,42 +33,44 @@
             android:text="FIGHT FIVE商家版"
             android:textColor="#ffffff"
             android:textSize="24sp" />
+
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="智能众包平台"
+            android:text="众包同城跑腿配送服务平台"
             android:textColor="#ffffff"
             android:textSize="16sp" />
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_below="@+id/ll_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" >
+        android:layout_below="@+id/ll_title"
+        android:layout_centerInParent="true">
 
         <include
             android:id="@+id/input_layout"
+            layout="@layout/input_layout"
             android:layout_width="match_parent"
             android:layout_height="130dip"
-            layout="@layout/input_layout" />
+            android:layout_marginTop="20dp" />
 
         <include
             android:id="@+id/layout_progress"
+            layout="@layout/layout_progress"
             android:layout_width="match_parent"
             android:layout_height="130dip"
-            layout="@layout/layout_progress"
             android:visibility="gone" />
 
         <TextView
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_margin="20dip"
-
             android:layout_below="@+id/input_layout"
+
             android:layout_centerInParent="true"
+            android:layout_margin="20dip"
             android:layout_marginTop="15dip"
             android:background="@drawable/text_bg"
             android:gravity="center"

@@ -9,6 +9,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -22,6 +25,7 @@ import com.example.administrator.fivecrowdsourcing_merchant.model.GlobalParamete
 import com.example.administrator.fivecrowdsourcing_merchant.model.Merchant;
 import com.example.administrator.fivecrowdsourcing_merchant.presenter.LoginPresenter;
 
+import java.net.SocketTimeoutException;
 import java.util.concurrent.Executors;
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
@@ -35,12 +39,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     private float mWidth, mHeight;
     private LinearLayout mPhone, mPsw;
     private TextView gotoRegister;
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //      setContentView(R.layout.activity_login);
         setContentView(R.layout.login);
+
         initView();
     }
 
@@ -88,6 +94,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                 /**
                  * 动画结束后，先显示加载的动画，然后再隐藏输入框
                  */
+               // login.setVisibility(View.INVISIBLE);
+
+
                 progress.setVisibility(View.VISIBLE);
                 progressAnimator(progress);
                 mInputLayout.setVisibility(View.INVISIBLE);
@@ -131,21 +140,40 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
         login = findViewById(R.id.login);
         phone = findViewById(R.id.phone);
-
         password = findViewById(R.id.password);
+
+
         login.setOnClickListener(view -> {
+
+            /**输入不为空*/
+            if(TextUtils.isEmpty(phone.getText())||TextUtils.isEmpty(password.getText()))
+            {
+                Toast.makeText(this, "手机号或密码不能为空！", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             // 计算出控件的高与宽
             mWidth = login.getMeasuredWidth();
             mHeight = login.getMeasuredHeight();
             // 隐藏输入框
             mPhone.setVisibility(View.INVISIBLE);
             mPsw.setVisibility(View.INVISIBLE);
+
+            /**隐藏按钮*/
+            login.setEnabled(false);
+            findViewById(R.id.main_title).setVisibility(View.INVISIBLE);
+            login.setText("正在登陆...");
+
             inputAnimator(mInputLayout, mWidth, mHeight);
             Executors.newSingleThreadExecutor().submit(() -> {
                 try {
                     Thread.sleep(3000);//休眠3秒
                     loginPresenter.Login(String.valueOf(phone.getText()), password.getText().toString(), URL);
-                } catch (InterruptedException e) {
+                } catch (Exception e) {
+                     if (e instanceof SocketTimeoutException)
+                     {
+                         Toast.makeText(this,"连接超时!",Toast.LENGTH_SHORT  ).show();
+                     }
                     e.printStackTrace();
                 }
             });

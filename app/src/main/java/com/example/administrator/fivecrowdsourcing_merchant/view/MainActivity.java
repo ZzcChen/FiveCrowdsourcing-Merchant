@@ -145,8 +145,12 @@ public class MainActivity extends AppCompatActivity
             intent.putExtra("merchant",merchant);
             startActivity(intent);
         }
-        //else if (id == R.id.nav_gallery) {
-//
+        else if (id == R.id.rule) {
+            Intent intent=new Intent(MainActivity.this, WebviewActivity.class);
+           // intent.putExtra("merchant",merchant);
+            startActivity(intent);
+        }
+
 //        } else if (id == R.id.nav_slideshow) {
 //
 //        } else if (id == R.id.nav_manage) {

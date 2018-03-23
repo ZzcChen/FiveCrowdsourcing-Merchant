@@ -1,10 +1,18 @@
 package com.example.administrator.fivecrowdsourcing_merchant.presenter;
 
+import android.app.Activity;
+import android.widget.Toast;
+
 import com.example.administrator.fivecrowdsourcing_merchant.model.Merchant;
+import com.example.administrator.fivecrowdsourcing_merchant.view.LoginActivity;
 import com.example.administrator.fivecrowdsourcing_merchant.view.LoginView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.SocketTimeoutException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -29,28 +37,57 @@ public class LoginPresenter {
     }
 
 
-    public void Login(String phone,String password,String url){
+    public void Login(String phone,String password,String url) throws Exception{
+
 //        //特殊通道，当服务器不行时直接登陆
 //        merchant.setName("zzc");
 //        loginView.onSuccess(merchant);
         servletIP=url+servletName;
-      sendRequestWithOkHttp(servletIP,phone,password);
+        try {
+            sendRequestWithOkHttp(servletIP,phone,password);
+        } catch ( SocketTimeoutException e) {
+            e.printStackTrace();
+             throw new SocketTimeoutException();
+        }
+
     }
 
-    private void sendRequestWithOkHttp(final String servletIP, final String phone,final String password) {
+    private void sendRequestWithOkHttp(final String servletIP, final String phone,final String password) throws Exception {
         try {
             RequestBody requestBody = new FormBody.Builder().
                     add("phone", phone).add("password", password).build();
-            OkHttpClient client = new OkHttpClient();
+
+            /**超时设置*/
+            OkHttpClient client = new OkHttpClient.Builder()
+                    .connectTimeout(10, TimeUnit.SECONDS)
+                    .readTimeout(20, TimeUnit.SECONDS)
+                    .writeTimeout(10, TimeUnit.SECONDS)//设置写的超时时间
+                    .build();
+            ;
+
+
+           /* //请求超时设置
+            client.newBuilder()
+                    .connectTimeout(10, TimeUnit.SECONDS)
+                    .readTimeout(20, TimeUnit.SECONDS)
+                    .writeTimeout(10,TimeUnit.SECONDS)//设置写的超时时间
+             .build();*/
+
+
             Request request = new Request.Builder().
                     url(servletIP).
                     post(requestBody).
                     build();
             Response response = client.newCall(request).execute();
+
             jsonData = response.body().string().toString();
             parseJSONWithJONObject(jsonData);
-        } catch (Exception e) {
+        } catch (SocketTimeoutException e) {
             e.printStackTrace();
+            throw new SocketTimeoutException();
+
+
+
         }
     }
 

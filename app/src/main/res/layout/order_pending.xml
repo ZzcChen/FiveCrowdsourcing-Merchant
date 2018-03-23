@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,21 +9,20 @@
     android:layout_gravity="center"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
+    android:layout_marginTop="2dp"
     android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/order_channel_layout_orderpending"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            >
+            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/shopName"
@@ -47,8 +45,7 @@
 
         <View
             style="@style/LineH_Fill_Width0_5_ForView"
-            android:layout_marginBottom="5dp"
-            />
+            android:layout_marginBottom="5dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -58,11 +55,10 @@
                 android:id="@+id/item_icon_orderpending"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/app_name"
-                app:srcCompat="@drawable/vector_give"
-                android:layout_toEndOf="@id/order_start_city"
                 android:layout_marginTop="4dp"
-                />
+                android:layout_toEndOf="@id/order_start_city"
+                android:contentDescription="@string/app_name"
+                app:srcCompat="@drawable/vector_give" />
 
 
             <TextView
@@ -74,9 +70,8 @@
                 android:text="商家地址" />
 
 
-
-
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="26dp"
             android:layout_height="15dp"
@@ -89,18 +84,18 @@
                 android:id="@+id/item_serviceSchedule_topLine_orderpending"
                 style="@style/LineV_Fill_Width1" />
         </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_marginTop="4dp"
                 android:id="@+id/item_icon2_orderpending"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:contentDescription="@string/app_name"
-                app:srcCompat="@drawable/vector_take"
-                />
+                app:srcCompat="@drawable/vector_take" />
 
             <TextView
                 android:id="@+id/cusAddress"
@@ -123,8 +118,7 @@
             android:orientation="vertical"
             android:paddingBottom="20dp"
             android:paddingStart="10dp"
-            android:paddingTop="10dp"
-            >
+            android:paddingTop="10dp">
 
 
             <TextView
@@ -143,6 +137,7 @@
                 tools:text="8元" />
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/layout_remark1"
             android:layout_width="match_parent"
@@ -153,8 +148,7 @@
             android:orientation="vertical"
             android:paddingBottom="20dp"
             android:paddingStart="10dp"
-            android:paddingTop="10dp"
-            >
+            android:paddingTop="10dp">
 
 
             <TextView
@@ -173,6 +167,7 @@
                 tools:text="15分钟" />
 
         </LinearLayout>
+
         <Button
             android:id="@+id/item_get_order_orderpending"
             style="@style/Login_Button_Style"
