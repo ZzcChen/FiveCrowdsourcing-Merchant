@@ -139,7 +139,7 @@ public class MapsActivity  extends AppCompatActivity {
         public void onReceiveLocation(BDLocation bdLocation) {
             //得到位置信息
             StringBuilder currtentPostion = new StringBuilder();
-            currtentPostion.append(bdLocation.getCity()).append(bdLocation.getDistrict()).append(bdLocation.getStreet());
+            currtentPostion.append(bdLocation.getCity()+"-").append(bdLocation.getDistrict()+"-").append(bdLocation.getStreet());
             address.setText(currtentPostion);
 
             addressInfo.setCity(bdLocation.getCity());
