@@ -21,6 +21,7 @@ public class Merchant implements Serializable {
     private Long margin;//保证金提交状态：1：提交；2：未提交
     private double longitude;//经度
     private double latitude;//纬度
+    private String status;//审核状态:0:新注册 1：待审核 2：审核通过
 
     public Merchant() {
     }
@@ -151,5 +152,13 @@ public class Merchant implements Serializable {
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

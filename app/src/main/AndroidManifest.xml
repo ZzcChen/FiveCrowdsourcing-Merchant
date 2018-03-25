@@ -69,15 +69,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.TrackActivity"
-            android:label=""
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".view.TestActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
+        android:label=""
+        android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".view.WebviewActivity" />
     </application>
 

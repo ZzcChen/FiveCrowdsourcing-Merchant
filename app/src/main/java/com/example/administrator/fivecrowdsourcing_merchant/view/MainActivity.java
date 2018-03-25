@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.administrator.fivecrowdsourcing_merchant.R;
 import com.example.administrator.fivecrowdsourcing_merchant.adapter.MyFragmentAdapter;
 import com.example.administrator.fivecrowdsourcing_merchant.fragment.CompletedOrderFragment;
+import com.example.administrator.fivecrowdsourcing_merchant.fragment.EnterFragment;
 import com.example.administrator.fivecrowdsourcing_merchant.fragment.PendingGoodFragment;
 import com.example.administrator.fivecrowdsourcing_merchant.fragment.PendingOrderFragment;
 import com.example.administrator.fivecrowdsourcing_merchant.fragment.SendingOrderFragment;
@@ -30,7 +31,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private TextView phone;
-    private TextView name;
     private TextView title;
     private TabLayout mTabLayout;
     private ViewPager mViewpager;
@@ -46,16 +46,40 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         //获得商家信息
         merchant= (Merchant) getIntent().getSerializableExtra("merchant");
-        String name=merchant.getName();
-//        Bundle args = new Bundle();
-//        args.putSerializable("PendingOrder", merchant);
         mFragments = new ArrayList<>();
-        mFragments.add(new PendingOrderFragment(merchant));
-        mFragments.add(new PendingGoodFragment(merchant));
-        mFragments.add(new SendingOrderFragment(merchant));
-        mFragments.add(new CompletedOrderFragment(merchant));
+        //商家入驻状态
+        judgeStatus();
+//        mFragments.add(new PendingOrderFragment(merchant));
+//        mFragments.add(new PendingGoodFragment(merchant));
+//        mFragments.add(new SendingOrderFragment(merchant));
+//        mFragments.add(new CompletedOrderFragment(merchant));
 //        mFragments.add(new PendingOrderFragment());
         initView();
+    }
+
+    private void judgeStatus() {
+        switch (merchant.getStatus()) {
+            case "0":
+                mFragments.add(new EnterFragment(merchant));
+                mFragments.add(new EnterFragment(merchant));
+                mFragments.add(new EnterFragment(merchant));
+                mFragments.add(new EnterFragment(merchant));
+                break;
+            case "1":
+                mFragments.add(new EnterFragment(merchant));
+                mFragments.add(new EnterFragment(merchant));
+                mFragments.add(new EnterFragment(merchant));
+                mFragments.add(new EnterFragment(merchant));
+                break;
+            case "2":
+                mFragments.add(new PendingOrderFragment(merchant));
+                mFragments.add(new PendingGoodFragment(merchant));
+                mFragments.add(new SendingOrderFragment(merchant));
+                mFragments.add(new CompletedOrderFragment(merchant));
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -97,9 +121,7 @@ public class MainActivity extends AppCompatActivity
         //初始化商家信息
         View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_main);
         phone  = (TextView)headerLayout.findViewById(R.id.phone);
-        name = (TextView)headerLayout.findViewById(R.id.name);
         phone.setText(merchant.getPhone());
-        name.setText(merchant.getName());
     }
 
     @Override

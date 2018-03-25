@@ -48,6 +48,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="40dp"
                 android:background="@null"
+                android:singleLine="true"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -64,16 +65,28 @@
                 android:layout_height="wrap_content"
                 android:text="商品种类" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/type_good"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="25dp"
                 android:layout_marginStart="40dp"
+                android:layout_weight="1"
                 android:background="@null"
                 android:hint="注意品类为商户经营类型，提交后不可修改"
-                android:inputType="number"
                 android:textColorHint="@color/light_grey_dark"
                 android:textSize="14sp" />
+
+            <!--<EditText-->
+                <!--android:id="@+id/type_good"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginStart="40dp"-->
+                <!--android:background="@null"-->
+                <!--android:hint="注意品类为商户经营类型，提交后不可修改"-->
+                <!--android:inputType="number"-->
+                <!--android:textColorHint="@color/light_grey_dark"-->
+                <!--android:textSize="14sp" />-->
         </LinearLayout>
 
         <View style="@style/LineH_Fill_Width1_5_ForView" />
@@ -97,6 +110,7 @@
                 android:background="@null"
                 android:hint="请填写收货人手机号"
                 android:inputType="number"
+                android:singleLine="true"
                 android:textColorHint="@color/light_grey_dark"
                 android:textSize="14sp" />
         </LinearLayout>

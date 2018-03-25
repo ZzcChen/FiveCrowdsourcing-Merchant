@@ -205,7 +205,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             mInputLayout.setVisibility(View.VISIBLE);
             mPhone.setVisibility(View.VISIBLE);
             mPsw.setVisibility(View.VISIBLE);
+            login.setEnabled(true);
+            login.setText("登录");
 
+            findViewById(R.id.main_title).setVisibility(View.VISIBLE);
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mInputLayout.getLayoutParams();
             params.leftMargin = 0;
             params.rightMargin = 0;

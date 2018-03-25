@@ -32,8 +32,8 @@ public class Step2Presenter {
 
     public void sendImage(String buslicensefilepath, String foodbuslicense, Merchant merchant) {
         this.merchant = merchant;
-        this.merchant.setBuslicensephoto("images" + "\\" + merchant.getMerchantid() + "\\" + buslicensefilepath);
-        this.merchant.setFoodbuslicensephoto("images" + "\\" + merchant.getMerchantid()+"\\"+foodbuslicense);
+        this.merchant.setBuslicensephoto(".."+"\\"+"merchantImages" + "\\" + merchant.getMerchantid() + "\\" + buslicensefilepath);
+        this.merchant.setFoodbuslicensephoto(".."+"\\"+"merchantImages" + "\\" + merchant.getMerchantid()+"\\"+foodbuslicense);
         step2View.finishStep2(merchant);
     }
 }

@@ -63,7 +63,6 @@ public class LoginPresenter {
                     .readTimeout(20, TimeUnit.SECONDS)
                     .writeTimeout(10, TimeUnit.SECONDS)//设置写的超时时间
                     .build();
-            ;
 
 
            /* //请求超时设置
@@ -97,14 +96,21 @@ public class LoginPresenter {
             JSONObject jsonObject = new JSONObject(jsonData);
             result=jsonObject.getString("result");
             if(result.equals("success")){
-                merchant.setPhone(jsonObject .getString("phone"));
-                merchant.setName(jsonObject .getString("name"));
-                merchant.setMerchantid(jsonObject.getLong("merchantid"));
-                merchant.setStorename(jsonObject.getString("storename"));
-                merchant.setAddress(jsonObject.getString("address"));
-                merchant.setMargin(jsonObject.getLong("margin"));
-                merchant.setLongitude(jsonObject.getDouble("longitude"));
-                merchant.setLatitude(jsonObject.getDouble("latitude"));
+                if (jsonObject .getString("status").equals("0")) {
+                    merchant.setMerchantid(jsonObject.getLong("merchantid"));
+                    merchant.setPhone(jsonObject .getString("phone"));
+                    merchant.setStatus(jsonObject.getString("status"));
+                } else{
+                    merchant.setPhone(jsonObject .getString("phone"));
+                    merchant.setName(jsonObject .getString("name"));
+                    merchant.setMerchantid(jsonObject.getLong("merchantid"));
+                    merchant.setStorename(jsonObject.getString("storename"));
+                    merchant.setAddress(jsonObject.getString("address"));
+                    merchant.setMargin(jsonObject.getLong("margin"));
+                    merchant.setLongitude(jsonObject.getDouble("longitude"));
+                    merchant.setLatitude(jsonObject.getDouble("latitude"));
+                    merchant.setStatus(jsonObject.getString("status"));
+                }
                 loginView.onSuccess(merchant);
             }else
                 loginView.onFailed();

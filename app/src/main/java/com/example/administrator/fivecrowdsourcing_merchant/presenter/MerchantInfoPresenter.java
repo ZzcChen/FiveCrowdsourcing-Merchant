@@ -37,7 +37,7 @@ public class MerchantInfoPresenter {
     public void sendMerchantInfo(String storename, String typeofgood, String phone, String address, double latitude, double longtitude, Merchant merchant) {
         this.merchant.setMerchantid(merchant.getMerchantid());
         this.merchant.setStorename(storename);
-        this.merchant.setTofgid((long) 1);//模拟配送类型为1
+        this.merchant.setTofgid(Long.valueOf(typeofgood));//模拟配送类型为1
         this.merchant.setPhone(phone);
         this.merchant.setAddress(address);
         this.merchant.setLatitude(latitude);

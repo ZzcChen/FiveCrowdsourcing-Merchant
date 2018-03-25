@@ -36,7 +36,7 @@ public class Step3Presenter {
         this.merchant = merchant;
         merchant.setName(name);
         merchant.setIdcardnumber(idcardnumber);
-        merchant.setIdcardphoto("images" + "\\" + merchant.getMerchantid() + "\\" + filename);
+        merchant.setIdcardphoto(".."+"\\"+"merchantImages"  + "\\" + merchant.getMerchantid() + "\\" + filename);
         servletIP=URL+servletName;
         sendRequestWithOkHttp(this.merchant,servletIP);
     }
@@ -74,6 +74,7 @@ public class Step3Presenter {
             JSONObject jsonObject = new JSONObject(jsonData);
             String result=jsonObject.getString("result");
             if(result.equals("success")){
+                merchant.setStatus("1");
                 step3View.finishStep3(merchant);
             }
         } catch (JSONException e) {

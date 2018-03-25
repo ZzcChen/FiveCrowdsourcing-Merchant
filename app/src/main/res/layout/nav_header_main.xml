@@ -21,17 +21,11 @@
         />
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="联系人姓名"
+        android:text="联系人电话"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-    <TextView
-        android:id="@+id/phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="联系电话" />
 
 </LinearLayout>

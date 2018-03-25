@@ -9,9 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,11 +32,13 @@ public class MerchantInfoActivity extends AppCompatActivity implements MerchantI
     private TextView nextstep;
     private EditText storename;
     private  EditText phone;;
-    private  EditText typeofgood;
+    private Spinner typeofgood;
     private  TextView address;
     private String addressname;
     private  AddressInfo addressInfo;
     List<StepBean> stepsBeanList = new ArrayList<>();
+    List<String> list = new ArrayList<String>();
+
 
     private Merchant merchant = new Merchant();
     MerchantInfoPresenter merchantInfoPresenter=new MerchantInfoPresenter(this  );
@@ -59,6 +63,10 @@ public class MerchantInfoActivity extends AppCompatActivity implements MerchantI
         stepsBeanList.add(stepBean1);
         stepsBeanList.add(stepBean2);
         stepsBeanList.add(stepBean3);
+        list.add("请选择商户经营类型");
+        list.add("即时餐饮");
+        list.add("小吃零食");
+        list.add("鲜花");
     }
 
     @SuppressLint("ResourceAsColor")
@@ -71,7 +79,12 @@ public class MerchantInfoActivity extends AppCompatActivity implements MerchantI
         storename = findViewById(R.id.storename);
         phone = findViewById(R.id.phone);
         phone.setText(merchant.getPhone());
+        //下拉选项
         typeofgood = findViewById(R.id.type_good);
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,R.layout.typeofgood_item,list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //绑定 Adapter到控件
+        typeofgood.setAdapter(adapter);
         title = findViewById(R.id.title);
         title.setText("商家信息认证");
         nextstep=findViewById(R.id.next_step);
@@ -100,8 +113,11 @@ public class MerchantInfoActivity extends AppCompatActivity implements MerchantI
            @Override
            public void onClick(View view) {
                //发送商户基本信息
-             merchantInfoPresenter.sendMerchantInfo(String.valueOf(storename.getText()), String.valueOf(typeofgood.getText()),
-                     String.valueOf(phone.getText()), String.valueOf(address.getText()),addressInfo.getLatitude(),addressInfo.getLongtitude(),merchant);
+             merchantInfoPresenter.sendMerchantInfo(String.valueOf(storename.getText()),
+                     String.valueOf(typeofgood.getSelectedItemPosition()),
+                     String.valueOf(phone.getText()),
+                     String.valueOf(address.getText()),
+                     addressInfo.getLatitude(),addressInfo.getLongtitude(),merchant);
            }
        });
     }
