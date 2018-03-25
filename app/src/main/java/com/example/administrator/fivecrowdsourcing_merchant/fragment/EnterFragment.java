@@ -100,8 +100,10 @@ public class EnterFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     }
 
     public void updateMerchantStatus(Merchant merchant) {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        intent.putExtra("merchant", merchant);
-        startActivity(intent);
+        if(merchant.getStatus().equals("2")) {
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            intent.putExtra("merchant", merchant);
+            startActivity(intent);
+        }
     }
 }

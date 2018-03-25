@@ -58,9 +58,9 @@ public class Step3Activity extends AppCompatActivity implements Step3View{
 
     private void initData() {
         StepBean stepBean0 = new StepBean("基本信息",1);
-        StepBean stepBean1 = new StepBean("资质证书",1);
-        StepBean stepBean2 = new StepBean("身份信息",0);
-        StepBean stepBean3 = new StepBean("完成",-1);
+        StepBean stepBean1 = new StepBean("身份信息",1);
+        StepBean stepBean2 = new StepBean("资质证书",0);
+        StepBean stepBean3 = new StepBean("已完成",-1);
         stepsBeanList.add(stepBean0);
         stepsBeanList.add(stepBean1);
         stepsBeanList.add(stepBean2);

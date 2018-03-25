@@ -56,8 +56,8 @@ public class MerchantInfoActivity extends AppCompatActivity implements MerchantI
 
     private void initData() {
         StepBean stepBean0 = new StepBean("基本信息",0);
-        StepBean stepBean1 = new StepBean("资质证书",-1);
-        StepBean stepBean2 = new StepBean("身份信息",-1);
+        StepBean stepBean1 = new StepBean("身份信息",-1);
+        StepBean stepBean2 = new StepBean("资质证书",-1);
         StepBean stepBean3 = new StepBean("已完成",-1);
         stepsBeanList.add(stepBean0);
         stepsBeanList.add(stepBean1);

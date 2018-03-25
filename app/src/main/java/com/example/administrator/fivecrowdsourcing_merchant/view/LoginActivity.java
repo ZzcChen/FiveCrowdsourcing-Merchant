@@ -172,7 +172,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                 } catch (Exception e) {
                      if (e instanceof SocketTimeoutException)
                      {
-                         Toast.makeText(this,"连接超时!",Toast.LENGTH_SHORT  ).show();
+                         runOnUiThread(() -> {
+                             Toast.makeText(this, "连接超时!", Toast.LENGTH_SHORT).show();
+                         });
                      }
                     e.printStackTrace();
                 }
@@ -199,7 +201,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void onFailed() {
         runOnUiThread(() -> {
-            Toast.makeText(this,"登录失败",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "登录失败！", Toast.LENGTH_SHORT).show();
+
 
             progress.setVisibility(View.GONE);
             mInputLayout.setVisibility(View.VISIBLE);

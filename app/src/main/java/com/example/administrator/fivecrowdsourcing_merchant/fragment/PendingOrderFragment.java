@@ -90,10 +90,10 @@ public class PendingOrderFragment extends Fragment implements SwipeRefreshLayout
         DeliveryOrder deliveryOrder = new DeliveryOrder();
         deliveryOrder.setMerchantid(merchant.getMerchantid());
         deliveryOrder.setCusName("张同学");
-        deliveryOrder.setCusAddress("杭州市西湖区浙工大XXXX");
+        deliveryOrder.setCusAddress("杭州市西湖区浙工大");
         deliveryOrder.setCusPhone("159XXXX6907");
-        deliveryOrder.setCuslat(30.228719);
-        deliveryOrder.setCuslog(119.713279);
+        deliveryOrder.setCuslat(30.230949);
+        deliveryOrder.setCuslog(120.043334);
         deliveryOrder.setThings("apple * 2, orange * 3");
         deliveryOrder.setStoreName(merchant.getStorename());
         deliveryOrder.setStoreAddress(merchant.getAddress());

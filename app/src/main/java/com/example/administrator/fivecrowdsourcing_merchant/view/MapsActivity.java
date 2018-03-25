@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -38,6 +40,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MapsActivity  extends AppCompatActivity {
 
     private BaiduMap baiduMap;
@@ -46,6 +49,7 @@ public class MapsActivity  extends AppCompatActivity {
     private boolean isFirstLocate=true;
     private TextView address;
     private Button send;
+    private TextView title;
     private AddressInfo addressInfo=new AddressInfo();
 
     @Override
@@ -61,6 +65,10 @@ public class MapsActivity  extends AppCompatActivity {
     }
 
     private void initView() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        title=findViewById(R.id.title);
+        title.setText("选择地址");
         address = findViewById(R.id.address);
         send = findViewById(R.id.send);
         mapView = (com.baidu.mapapi.map.MapView) findViewById(R.id.bmapView);
@@ -145,8 +153,10 @@ public class MapsActivity  extends AppCompatActivity {
             addressInfo.setCity(bdLocation.getCity());
             addressInfo.setDistrict(bdLocation.getDistrict());
             addressInfo.setStreet(bdLocation.getStreet());
-            addressInfo.setLatitude(bdLocation.getLatitude());
-            addressInfo.setLongtitude(bdLocation.getLongitude());
+
+            //坐标转换
+            gcj02_To_Bd09(bdLocation.getLongitude(), bdLocation.getLatitude());
+
 
             if (bdLocation.getLocType() == BDLocation.TypeGpsLocation
                     || bdLocation.getLocType() == BDLocation.TypeNetWorkLocation) {
@@ -176,6 +186,18 @@ public class MapsActivity  extends AppCompatActivity {
             baiduMap.setMyLocationData(locationdata);
         }
     }
+
+    private void gcj02_To_Bd09(double  gg_lon, double gg_lat) {
+       double pi = 3.141592653589793 * 3000.0 / 180.0;
+        double x = gg_lon, y = gg_lat;
+        double z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y *pi);
+        double theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * pi);
+        double bd_lon = z * Math.cos(theta) + 0.0065;
+        double bd_lat = z * Math.sin(theta) + 0.006;
+        addressInfo.setLatitude(bd_lat);
+        addressInfo.setLongtitude(bd_lon);
+    }
+
 
     @Override
     protected void onResume() {

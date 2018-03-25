@@ -64,11 +64,11 @@ public class Step2Activity extends AppCompatActivity implements Step2View{
         initView();
     }
 
-    private void initData() {
+    private void initData() {//1 0 -1 -1
         StepBean stepBean0 = new StepBean("基本信息",1);
-        StepBean stepBean1 = new StepBean("资质证书",0);
-        StepBean stepBean2 = new StepBean("身份信息",-1);
-        StepBean stepBean3 = new StepBean("完成",-1);
+        StepBean stepBean1 = new StepBean("身份信息",0);
+        StepBean stepBean2 = new StepBean("资质证书",-1);
+        StepBean stepBean3 = new StepBean("已完成",-1);
         stepsBeanList.add(stepBean0);
         stepsBeanList.add(stepBean1);
         stepsBeanList.add(stepBean2);
