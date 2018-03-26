@@ -5,9 +5,8 @@ package com.example.administrator.fivecrowdsourcing_merchant.view;
  */
 
 import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
+import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -15,8 +14,6 @@ import android.webkit.WebViewClient;
 
 import com.example.administrator.fivecrowdsourcing_merchant.R;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 public class WebviewActivity extends AppCompatActivity {
 
@@ -31,7 +28,7 @@ public class WebviewActivity extends AppCompatActivity {
 
     private void init() {
         webView=findViewById(R.id.webView);
-        webView.loadUrl("http://www.baidu.com");
+        webView.loadUrl("file:///android_asset/FF.html");
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -79,9 +76,9 @@ public class WebviewActivity extends AppCompatActivity {
     private void test() {
         webView = (WebView) findViewById(R.id.webView);
         //WebView加载本地资源
-//        webView.loadUrl("file:///android_asset/example.html");
+        webView.loadUrl("file:///android_asset/FF.html");
         //WebView加载web资源
-        webView.loadUrl("http://www.baidu.com");
+       // webView.loadUrl("http://www.baidu.com");
         //覆盖WebView默认通过第三方或者是系统浏览器打开网页的行为，使得网页可以在WebView中打开
         webView.setWebViewClient(new WebViewClient(){
             @Override

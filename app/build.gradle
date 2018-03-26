@@ -42,6 +42,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.1'
     compile 'com.githang:status-bar-compat:latest.integration'
     compile 'com.github.baoyachi:StepView:1.9'
+    compile 'com.github.lygttpod:SuperTextView:2.1.6'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
 }

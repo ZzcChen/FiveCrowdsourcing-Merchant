@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.fivecrowdsourcing_merchant.R;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity
     private List<Fragment> mFragments;
     //private static final int SHOW_MERCHANT=1;//显示商家联系人信息
     Merchant merchant=new Merchant();
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +124,17 @@ public class MainActivity extends AppCompatActivity
         View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_main);
         phone  = (TextView)headerLayout.findViewById(R.id.phone);
         phone.setText(merchant.getPhone());
+        imageView=(ImageView)headerLayout.findViewById(R.id.imageView);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this, UserCenterActivity.class);
+                intent.putExtra("merchant",merchant);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

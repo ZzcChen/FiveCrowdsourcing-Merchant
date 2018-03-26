@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.administrator.fivecrowdsourcing_merchant.R;
+import com.example.administrator.fivecrowdsourcing_merchant.fragment.CompletedOrderFragment;
 import com.example.administrator.fivecrowdsourcing_merchant.model.DeliveryOrder;
 
 import java.util.List;
@@ -19,8 +20,14 @@ import java.util.List;
 public class CompletedOrderAdapter extends RecyclerView.Adapter<CompletedOrderAdapter.ViewHolder>{
     private List<DeliveryOrder> orderList;
 
+    public CompletedOrderFragment completedOrderFragment  ;
     public CompletedOrderAdapter(List<DeliveryOrder> orderList) {
         this.orderList = orderList;
+    }
+
+    public CompletedOrderAdapter(List<DeliveryOrder> orderList,CompletedOrderFragment  completedOrderFragment) {
+        this.orderList = orderList;
+        this.completedOrderFragment = completedOrderFragment;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -58,7 +65,13 @@ public class CompletedOrderAdapter extends RecyclerView.Adapter<CompletedOrderAd
         holder.estimatedTime.setText(deliveryOrder.getEstimatedtime()+"分钟");
         holder.estimatedPrice.setText(deliveryOrder.getEstimatedtotalprice()+"元");
         holder.pendingGood.setText("待评价");
-
+        //跟踪跑腿人路径
+        holder.pendingGood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            //   completedOrderFragment.showRunnerAsses(deliveryOrder);
+            }
+        });
     }
 
     @Override

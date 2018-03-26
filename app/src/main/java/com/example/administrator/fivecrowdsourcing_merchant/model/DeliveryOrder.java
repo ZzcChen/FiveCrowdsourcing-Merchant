@@ -32,6 +32,10 @@ public class DeliveryOrder implements Serializable {
     private  String storeAddress;//商店地址
     private double storeLat;//商店纬度
     private double storeLog;//商店经度
+    private double runlat;// 跑腿人纬度
+    private double runlon;// 跑腿人经度
+    private String runName;//跑腿人姓名
+    private String runPhone;//跑腿人电话
 
     public DeliveryOrder() {
     }
@@ -256,5 +260,37 @@ public class DeliveryOrder implements Serializable {
 
     public void setStoreLog(double storeLog) {
         this.storeLog = storeLog;
+    }
+
+    public double getRunlat() {
+        return runlat;
+    }
+
+    public void setRunlat(double runlat) {
+        this.runlat = runlat;
+    }
+
+    public double getRunlon() {
+        return runlon;
+    }
+
+    public void setRunlon(double runlon) {
+        this.runlon = runlon;
+    }
+
+    public String getRunName() {
+        return runName;
+    }
+
+    public void setRunName(String runName) {
+        this.runName = runName;
+    }
+
+    public String getRunPhone() {
+        return runPhone;
+    }
+
+    public void setRunPhone(String runPhone) {
+        this.runPhone = runPhone;
     }
 }

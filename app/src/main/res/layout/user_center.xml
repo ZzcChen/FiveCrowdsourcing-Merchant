@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/app_bar_main" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="20dp">
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/user_info"
+                stv:sDividerLineType="both"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                stv:sLeftIconRes="@mipmap/head_default"
+                stv:sLeftTextString="帐号管理"
+                stv:sRightIconRes="@mipmap/arrow_right_red"
+                stv:sLeftViewGravity="left_center"
+                stv:sRightTextString="点击认证"
+                stv:sRightTextSize="12dp"/>
+
+            <!--<com.allen.library.SuperTextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--stv:sCenterBottomTextString="暂无"-->
+                <!--stv:sCenterTextColor="@color/colorAccent"-->
+
+                <!--stv:sCenterTopTextString="完成单量"-->
+                <!--stv:sCenterTopTextColor="@color/colorPrimary"-->
+
+                <!--stv:sCenterViewGravity="center"-->
+                <!--stv:sDividerLineType="both"-->
+                <!--stv:sLeftBottomTextString="0%"-->
+
+                <!--stv:sLeftTextColor="@color/colorAccent"-->
+
+                <!--stv:sLeftTopTextString="准时送达率"-->
+                <!--stv:sLeftTopTextColor="@color/colorPrimary"-->
+                <!--stv:sRightBottomTextString="0"-->
+
+
+                <!--stv:sRightTextColor="@color/colorAccent"-->
+
+                <!--stv:sRightTopTextString="信用分"-->
+                <!--stv:sRightTopTextColor="@color/colorPrimary"/>-->
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/my_wallet"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                stv:sLeftIconRes="@mipmap/yuan_48px"
+                stv:sLeftTextString="我的钱包"
+                stv:sRightTextString="查看"
+                stv:sRightTextSize="12dp"
+                stv:sRightIconRes="@mipmap/arrow_right_red" />
+
+            <com.allen.library.SuperTextView
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                stv:sLeftTextString="通知设置"
+                stv:sRightViewType="switchBtn"
+                stv:sSwitchIsChecked="true"
+                stv:sSwitchMinWidth="50dp"
+                stv:sThumbResource="@drawable/thumb"
+                stv:sTrackResource="@drawable/track"
+                />
+            <com.allen.library.SuperTextView
+                android:layout_width="match_parent"
+                stv:sLeftTextString="账号与安全"
+                stv:sRightTextString="已保护"
+                stv:sRightTextSize="12dp"
+                stv:sRightIconRes="@mipmap/arrow_right_red"
+                stv:sRightTvDrawableLeft="@mipmap/v1"
+                android:layout_height="50dp" />
+
+            <com.allen.library.SuperTextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                stv:sDividerLineType="bottom"
+                stv:sLeftTextString="设置中心"
+                stv:sRightIconRes="@mipmap/arrow_right_red" />
+
+
+            <com.allen.library.SuperTextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                stv:sDividerLineType="both"
+                stv:sLeftTextString="意见反馈"
+                stv:sRightIconRes="@mipmap/arrow_right_red" />
+
+            <com.allen.library.SuperTextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                stv:sDividerLineType="both"
+                stv:sLeftTextString="关于FF"
+                stv:sRightIconRes="@mipmap/arrow_right_red" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

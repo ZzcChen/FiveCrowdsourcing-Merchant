@@ -72,7 +72,13 @@
             android:name=".view.TrackActivity"
         android:label=""
         android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".view.WebviewActivity" />
+        <activity android:name=".view.WebviewActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".view.UserCenterActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".view.AssesActivity" />
     </application>
 
 </manifest>

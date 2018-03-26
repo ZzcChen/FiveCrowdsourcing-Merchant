@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/app_bar_main" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/user_balance"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                stv:sBackgroundDrawableRes="@color/colorPrimary"
+
+
+                stv:sDividerLineType="bottom"
+                stv:sLeftBottomTextColor="@color/white"
+                stv:sLeftBottomTextSize="65dp"
+                stv:sLeftBottomTextString="0.00"
+                stv:sLeftTopTextColor="@color/white"
+                stv:sLeftTopTextString="余额账户(元)"
+                stv:sLeftViewGravity="left_center" />
+
+            <com.allen.library.SuperTextView
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                stv:sDividerLineType="both"
+                stv:sLeftIconRes="@mipmap/v2"
+                stv:sLeftTextString="充值"
+                stv:sLeftViewGravity="left_center"
+                stv:sRightIconRes="@mipmap/arrow_right_red" />
+
+            <com.allen.library.SuperTextView
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                stv:sDividerLineType="both"
+                stv:sLeftIconRes="@mipmap/uv"
+                stv:sLeftTextString="提现"
+                stv:sLeftViewGravity="left_center"
+                stv:sRightIconRes="@mipmap/arrow_right_red" />
+
+            <com.allen.library.SuperTextView
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/sp_20"
+                stv:sDividerLineType="both"
+                stv:sLeftIconRes="@mipmap/v0"
+                stv:sLeftTextString="信用分商城"
+                stv:sLeftViewGravity="left_center"
+                stv:sRightIconRes="@mipmap/arrow_right_red" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -174,6 +174,24 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                      {
                          runOnUiThread(() -> {
                              Toast.makeText(this, "连接超时!", Toast.LENGTH_SHORT).show();
+                             progress.setVisibility(View.GONE);
+                             mInputLayout.setVisibility(View.VISIBLE);
+                             mPhone.setVisibility(View.VISIBLE);
+                             mPsw.setVisibility(View.VISIBLE);
+                             login.setEnabled(true);
+                             login.setText("登录");
+                             findViewById(R.id.main_title).setVisibility(View.VISIBLE);
+
+                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mInputLayout.getLayoutParams();
+                             params.leftMargin = 0;
+                             params.rightMargin = 0;
+                             mInputLayout.setLayoutParams(params);
+
+
+                             ObjectAnimator animator2 = ObjectAnimator.ofFloat(mInputLayout, "scaleX", 0.5f, 1f);
+                             animator2.setDuration(500);
+                             animator2.setInterpolator(new AccelerateDecelerateInterpolator());
+                             animator2.start();
                          });
                      }
                     e.printStackTrace();
@@ -195,6 +213,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     public void onSuccess(Merchant merchant) {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.putExtra("merchant", merchant);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 

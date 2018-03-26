@@ -1,6 +1,7 @@
 package com.example.administrator.fivecrowdsourcing_merchant.view;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -13,6 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
@@ -31,6 +35,7 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.example.administrator.fivecrowdsourcing_merchant.R;
+import com.example.administrator.fivecrowdsourcing_merchant.fragment.SendingOrderFragment;
 import com.example.administrator.fivecrowdsourcing_merchant.model.DeliveryOrder;
 
 import java.util.ArrayList;
@@ -41,6 +46,8 @@ public class TrackActivity extends AppCompatActivity {
     public LocationClient mLocationClient;
     private com.baidu.mapapi.map.MapView mapView;
     private DeliveryOrder deliveryOrder;
+    private Button confirm;
+    private TextView titile;
     private boolean isFirstLocate = true;
 
     @Override
@@ -56,9 +63,26 @@ public class TrackActivity extends AppCompatActivity {
     }
 
     private void intView() {
+        confirm = findViewById(R.id.confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         deliveryOrder = (DeliveryOrder) getIntent().getSerializableExtra("deliveryOrder");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        TextView runnerName = findViewById(R.id.runnerName);
+        TextView runnerPhone = findViewById(R.id.runnerPhone);
+
+        runnerName.setText(deliveryOrder.getRunName());
+        runnerPhone.setText(deliveryOrder.getRunPhone());
+
         setSupportActionBar(toolbar);
+
+        titile=findViewById(R.id.title);
+        titile.setText("实时监控");
+
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -187,8 +211,8 @@ public class TrackActivity extends AppCompatActivity {
         baiduMap.addOverlays(options);
         //显示跑腿人位置
         MyLocationData.Builder locationbuilder = new MyLocationData.Builder();
-        locationbuilder.latitude(deliveryOrder.getCuslat());
-        locationbuilder.longitude(deliveryOrder.getCuslog());
+        locationbuilder.latitude(deliveryOrder.getRunlat());
+        locationbuilder.longitude(deliveryOrder.getRunlon());
         MyLocationData locationdata = locationbuilder.build();
         baiduMap.setMyLocationData(locationdata);
     }

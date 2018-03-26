@@ -1,6 +1,7 @@
 package com.example.administrator.fivecrowdsourcing_merchant.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -11,12 +12,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.administrator.fivecrowdsourcing_merchant.R;
 import com.example.administrator.fivecrowdsourcing_merchant.adapter.CompletedOrderAdapter;
 import com.example.administrator.fivecrowdsourcing_merchant.model.DeliveryOrder;
 import com.example.administrator.fivecrowdsourcing_merchant.model.Merchant;
 import com.example.administrator.fivecrowdsourcing_merchant.presenter.CompletedOrderPresenter;
+import com.example.administrator.fivecrowdsourcing_merchant.view.AssesActivity;
+import com.example.administrator.fivecrowdsourcing_merchant.view.TrackActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +36,7 @@ public class CompletedOrderFragment extends Fragment implements SwipeRefreshLayo
     public CompletedOrderPresenter completedOrderPresenter = new CompletedOrderPresenter(this);
     private ArrayList<DeliveryOrder> orderList;
     private Merchant merchant;
+    private Button pendingGood;
 
     @SuppressLint("ValidFragment")
     public CompletedOrderFragment(Merchant merchant) {
@@ -52,9 +57,14 @@ public class CompletedOrderFragment extends Fragment implements SwipeRefreshLayo
         mSwipeLayout.setOnRefreshListener(this);
         mRecyclerView = view.findViewById(R.id.pending_rv_list_completed);
         completedOrderPresenter.dispalyInitOrder(merchant);
+
         return view;
     }
-
+    public void showRunnerAsses(DeliveryOrder  deliveryOrder) {
+        Intent intent = new Intent(getActivity(), AssesActivity.class);
+        intent.putExtra("deliveryOrder",deliveryOrder);
+        startActivity(intent);
+    }
     @Override
     public void onRefresh() {
         new Handler().postDelayed(new Runnable() {
