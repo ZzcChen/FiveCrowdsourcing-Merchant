@@ -69,7 +69,7 @@ public class CompletedOrderAdapter extends RecyclerView.Adapter<CompletedOrderAd
         holder.pendingGood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            //   completedOrderFragment.showRunnerAsses(deliveryOrder);
+               completedOrderFragment.showRunnerAsses(deliveryOrder);
             }
         });
     }

@@ -165,7 +165,7 @@ public class PendingOrderFragment extends Fragment implements SwipeRefreshLayout
         }, 2000);
     }
 
-    public void dispalyOrder(List<DeliveryOrder> deliveryOrderList) {
+    public void displayOrder(List<DeliveryOrder> deliveryOrderList) {
         getActivity().runOnUiThread(() -> {
             for (int i = 0; i < deliveryOrderList.size(); i++) {
                 deliveryOrderList.get(i).setStoreAddress(merchant.getAddress());
@@ -173,6 +173,7 @@ public class PendingOrderFragment extends Fragment implements SwipeRefreshLayout
             }
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
             mRecyclerView.setLayoutManager(layoutManager);
+            //PendingOrderAdpater adpater = new PendingOrderAdpater(deliveryOrderList);
             PendingOrderAdpater adpater = new PendingOrderAdpater(deliveryOrderList);
             mRecyclerView.setAdapter(adpater);
         });

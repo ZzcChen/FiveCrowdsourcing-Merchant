@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <!--相机预览界面，必须设置-->
+    <com.vise.face.CameraPreview
+        android:id="@+id/face_detector_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <!--绘制人脸识别框，可依需配置-->
+    <com.vise.face.FaceRectView
+        android:id="@+id/face_detector_face"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <!--拍照按钮，点击后进行拍照，按照需要进行添加-->
+    <Button
+        android:id="@+id/face_detector_take_photo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="@android:drawable/ic_menu_camera"
+        />
+    <TextView
+        android:id="@+id/face_detector_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</FrameLayout>

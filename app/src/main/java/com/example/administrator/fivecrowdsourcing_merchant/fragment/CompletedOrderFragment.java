@@ -85,7 +85,7 @@ public class CompletedOrderFragment extends Fragment implements SwipeRefreshLayo
             }
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
             mRecyclerView.setLayoutManager(layoutManager);
-            CompletedOrderAdapter adpater = new  CompletedOrderAdapter(deliveryOrderList);
+            CompletedOrderAdapter adpater = new  CompletedOrderAdapter(deliveryOrderList,this);
             mRecyclerView.setAdapter(adpater);
         });
     }

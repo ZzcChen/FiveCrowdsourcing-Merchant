@@ -8,7 +8,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +73,7 @@ public class PendingOrderPresenter {
     private void parseJSONWithJONObject(String jsonData) throws JSONException {
         Gson gson = new Gson();
         list= gson.fromJson( jsonData, new TypeToken<List<DeliveryOrder>>(){}.getType());
-        pendingOrderFragment.dispalyOrder(list);
+        pendingOrderFragment.displayOrder(list);
 //            JSONObject jsonObject = new JSONObject(jsonData);
 //            String result=jsonObject.getString("result");
 //            if(result.equals("success")){
@@ -82,7 +81,7 @@ public class PendingOrderPresenter {
 //                Long estimatedtime = jsonObject.getLong("estimatedtime");//预估时间
 //                deliveryOrder.setEstimatedtime(estimatedtime);
 //                deliveryOrder.setEstimatedtotalprice(estimatedtotalprice);
-//                pendingOrderFragment.dispalyOrder(deliveryOrder);
+//                pendingOrderFragment.displayOrder(deliveryOrder);
 //            }
     }
 

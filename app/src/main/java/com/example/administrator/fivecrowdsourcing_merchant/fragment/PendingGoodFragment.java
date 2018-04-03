@@ -1,6 +1,8 @@
 package com.example.administrator.fivecrowdsourcing_merchant.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -22,6 +24,7 @@ import com.example.administrator.fivecrowdsourcing_merchant.model.DeliveryOrder;
 import com.example.administrator.fivecrowdsourcing_merchant.model.Merchant;
 import com.example.administrator.fivecrowdsourcing_merchant.presenter.PendingGoodPresenter;
 import com.example.administrator.fivecrowdsourcing_merchant.presenter.PendingOrderPresenter;
+import com.example.administrator.fivecrowdsourcing_merchant.view.FaceDetectorActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +57,7 @@ public class PendingGoodFragment extends Fragment implements SwipeRefreshLayout.
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         initialize();
     }
 
@@ -123,8 +127,14 @@ public class PendingGoodFragment extends Fragment implements SwipeRefreshLayout.
             }
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
             mRecyclerView.setLayoutManager(layoutManager);
-            PendingGoodAdpater adpater = new PendingGoodAdpater(deliveryOrderList);
+           // PendingGoodAdpater adpater = new PendingGoodAdpater(deliveryOrderList);
+            PendingGoodAdpater adpater = new PendingGoodAdpater(deliveryOrderList,this);
             mRecyclerView.setAdapter(adpater);
         });
+    }
+
+    public void showViseFace() {
+        Intent intent = new Intent(getActivity(), FaceDetectorActivity.class);
+        startActivity(intent);
     }
 }

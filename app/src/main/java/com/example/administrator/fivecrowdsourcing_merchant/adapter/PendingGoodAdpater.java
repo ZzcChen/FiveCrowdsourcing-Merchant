@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.administrator.fivecrowdsourcing_merchant.R;
+import com.example.administrator.fivecrowdsourcing_merchant.fragment.PendingGoodFragment;
+import com.example.administrator.fivecrowdsourcing_merchant.fragment.SendingOrderFragment;
 import com.example.administrator.fivecrowdsourcing_merchant.model.DeliveryOrder;
 
 import org.w3c.dom.Text;
@@ -20,9 +22,14 @@ import java.util.List;
 
 public class PendingGoodAdpater extends RecyclerView.Adapter<PendingGoodAdpater.ViewHolder> {
     private List<DeliveryOrder> orderList;
-
+    public PendingGoodFragment pendingGoodFragment;
     public PendingGoodAdpater(List<DeliveryOrder> orderList) {
         this.orderList = orderList;
+    }
+
+    public PendingGoodAdpater(List<DeliveryOrder> orderList, PendingGoodFragment pendingGoodFragment) {
+        this.orderList = orderList;
+        this.pendingGoodFragment = pendingGoodFragment;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -59,7 +66,13 @@ public class PendingGoodAdpater extends RecyclerView.Adapter<PendingGoodAdpater.
         holder.cusAddress.setText(deliveryOrder.getCusAddress());
         holder.estimatedTime.setText(deliveryOrder.getEstimatedtime()+"分钟");
         holder.estimatedPrice.setText(deliveryOrder.getEstimatedtotalprice()+"元");
-        holder.pendingGood.setText("待取货");
+        holder.pendingGood.setText("跑腿人识别");
+        holder.pendingGood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pendingGoodFragment.showViseFace();
+            }
+        });
     }
 
     @Override

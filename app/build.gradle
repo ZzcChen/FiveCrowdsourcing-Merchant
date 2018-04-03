@@ -43,6 +43,8 @@ dependencies {
     compile 'com.githang:status-bar-compat:latest.integration'
     compile 'com.github.baoyachi:StepView:1.9'
     compile 'com.github.lygttpod:SuperTextView:2.1.6'
+    compile 'com.vise.xiaoyaoyou:viseface:1.1.0'
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
 }
