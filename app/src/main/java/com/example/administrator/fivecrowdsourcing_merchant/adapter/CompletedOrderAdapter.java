@@ -64,7 +64,7 @@ public class CompletedOrderAdapter extends RecyclerView.Adapter<CompletedOrderAd
         holder.cusAddress.setText(deliveryOrder.getCusAddress());
         holder.estimatedTime.setText(deliveryOrder.getEstimatedtime()+"分钟");
         holder.estimatedPrice.setText(deliveryOrder.getEstimatedtotalprice()+"元");
-        holder.pendingGood.setText("待评价");
+        holder.pendingGood.setText("已完成");
         //跟踪跑腿人路径
         holder.pendingGood.setOnClickListener(new View.OnClickListener() {
             @Override

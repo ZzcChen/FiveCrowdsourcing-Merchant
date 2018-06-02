@@ -136,5 +136,9 @@ public class PendingGoodFragment extends Fragment implements SwipeRefreshLayout.
     public void showViseFace() {
         Intent intent = new Intent(getActivity(), FaceDetectorActivity.class);
         startActivity(intent);
+        //答辩演示专用代码
+        List<DeliveryOrder> deliveryOrders = new ArrayList<>();
+
+        dispalyOrder(deliveryOrders);
     }
 }

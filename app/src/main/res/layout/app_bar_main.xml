@@ -23,7 +23,9 @@
                 android:id="@+id/back_step"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left" />
+                android:layout_gravity="left"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/title"

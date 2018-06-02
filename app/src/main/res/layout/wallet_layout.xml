@@ -35,6 +35,7 @@
 
             <com.allen.library.SuperTextView
 
+                android:id="@+id/charge"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 stv:sDividerLineType="both"

@@ -154,6 +154,9 @@ public class MapsActivity  extends AppCompatActivity {
             addressInfo.setDistrict(bdLocation.getDistrict());
             addressInfo.setStreet(bdLocation.getStreet());
 
+           //视频专用
+//            addressInfo.setLatitude(30.248606);
+//            addressInfo.setLongtitude(120.172633);
             addressInfo.setLatitude(bdLocation.getLatitude());
             addressInfo.setLongtitude(bdLocation.getLongitude() );
 
@@ -180,6 +183,9 @@ public class MapsActivity  extends AppCompatActivity {
                 }, 400);    //延时1s执行
             }
             MyLocationData.Builder locationbuilder = new MyLocationData.Builder();
+            //视频专用
+//            locationbuilder.latitude(bdLocation.getLatitude());
+//            locationbuilder.longitude(bdLocation.getLongitude());
             locationbuilder.latitude(bdLocation.getLatitude());
             locationbuilder.longitude(bdLocation.getLongitude());
             MyLocationData locationdata = locationbuilder.build();

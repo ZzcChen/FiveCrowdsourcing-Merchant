@@ -23,6 +23,8 @@ public class UserCenterActivity extends AppCompatActivity {
     private Merchant merchant = new Merchant();
     private SuperTextView userInfo;
     private SuperTextView userBalance;
+    private CenterDialog centerDialog;
+    private SuperTextView charge;
     private int type;
     private static final int CHOOSE_IDCARDOPPO = 1;
     private static final int CHOOSE_IDCARDINHAND =2;
@@ -82,6 +84,11 @@ public class UserCenterActivity extends AppCompatActivity {
                 userBalance = (SuperTextView) findViewById(R.id.user_balance);
                 nextStep=findViewById(R.id.next_step);
                 nextStep.setText("明细");
+                charge=findViewById(R.id.charge);
+
+                centerDialog = new CenterDialog(UserCenterActivity.this, R.layout.dialog_layout,   new int[]{R.id.dialog_cancel, R.id.dialog_sure},"是否缴纳保证金");
+
+
 //                nextStep.setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View v) {
@@ -118,6 +125,29 @@ public class UserCenterActivity extends AppCompatActivity {
                 });
                 break;
             case 1:
+                charge.setOnSuperTextViewClickListener(new SuperTextView.OnSuperTextViewClickListener() {
+                    @Override
+                    public void onClickListener(SuperTextView superTextView) {
+                        centerDialog.show();
+                        centerDialog.setOnCenterItemClickListener(new CenterDialog.OnCenterItemClickListener() {
+                            @Override
+                            public void OnCenterItemClick(CenterDialog dialog, View view) {
+                                switch (view.getId()) {
+                                    case R.id.dialog_sure:
+                                        Toast.makeText(UserCenterActivity.this, "缴纳成功", Toast.LENGTH_SHORT).show();
+                                        userBalance.setLeftBottomString("200.00");
+                                        merchant.setMargin(Long.valueOf(1));
+                                        break;
+                                    default:
+                                        Toast.makeText(UserCenterActivity.this, "下次再缴纳", Toast.LENGTH_SHORT).show();
+                                        //onResume();
+
+                                        break;
+                                }
+                            }
+                        });
+                    }
+                });
                 //userBalance.setLeftBottomString(merchant.getBalance().toString());
                 break;
         }

@@ -26,7 +26,7 @@
                 stv:sLeftTextString="帐号管理"
                 stv:sRightIconRes="@mipmap/arrow_right_red"
                 stv:sLeftViewGravity="left_center"
-                stv:sRightTextString="点击认证"
+                stv:sRightTextString="已认证"
                 stv:sRightTextSize="12dp"/>
 
             <!--<com.allen.library.SuperTextView-->

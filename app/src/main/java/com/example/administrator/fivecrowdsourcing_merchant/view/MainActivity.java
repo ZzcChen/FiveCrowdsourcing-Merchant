@@ -97,6 +97,10 @@ public class MainActivity extends AppCompatActivity
         title=findViewById(R.id.title);
         title.setText("Five 商家版本");
 
+//        //视频演示
+//        title.setText("Five 跑腿人版本");
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -112,7 +116,7 @@ public class MainActivity extends AppCompatActivity
         //Tablayout
         mTabLayout = findViewById(R.id.tab_layout);
        mViewpager=findViewById(R.id.viewpager);
-        mViewpager.setOffscreenPageLimit(2);
+        mViewpager.setOffscreenPageLimit(3);
         mViewpager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewpager);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式

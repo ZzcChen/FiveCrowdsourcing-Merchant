@@ -19,10 +19,40 @@
             android:orientation="vertical"
             android:paddingTop="20dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:fontFamily="casual"
+                android:text="本次配送费用为7元"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                 />
+
+            <Button
+                android:id="@+id/pay"
+                style="@style/Login_Button_Style2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:text="支付" />
+        </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="80dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -42,10 +72,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="10dp"
-                    android:clickable="false"
-                    android:isIndicator="true"
                     android:numStars="5"
-                    android:stepSize="1" />
+                    android:stepSize="1.0" />
 
             </LinearLayout>
 
@@ -64,7 +92,7 @@
                     android:maxLines="10"
                     android:nestedScrollingEnabled="false"
                     android:singleLine="false"
-                    android:text="说说哪里好，鼓励一下我们吧~" />
+                    android:hint="说说哪里好，鼓励一下我们吧~" />
             </LinearLayout>
         </LinearLayout>
 

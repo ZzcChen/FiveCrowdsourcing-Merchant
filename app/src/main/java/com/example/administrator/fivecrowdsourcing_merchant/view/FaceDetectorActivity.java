@@ -136,38 +136,27 @@ public class FaceDetectorActivity extends Activity implements  CenterDialog.OnCe
             @Override
             public void onClick(View view) {
 
-                mFace_detector_preview.getCamera().takePicture(new Camera.ShutterCallback() {
-                    @Override
-                    public void onShutter() {
+//                mFace_detector_preview.getCamera().takePicture(new Camera.ShutterCallback() {
+//                    @Override
+//                    public void onShutter() {
+//
+//                    }
+//                }, null, new Camera.PictureCallback() {
+//                    @Override
+//                    public void onPictureTaken(byte[] bytes, Camera camera) {
+//                        mFace_detector_preview.getCamera().stopPreview();
+//                        saveImage(bytes);
+//
+//                    }
+//                });
 
-                    }
-                }, null, new Camera.PictureCallback() {
-                    @Override
-                    public void onPictureTaken(byte[] bytes, Camera camera) {
-                        mFace_detector_preview.getCamera().stopPreview();
-                        saveImage(bytes);
-
-                    }
-                });
-               // Thread.sleep(3000);//休眠3秒
-                //ProgressDialog sdialog = ProgressDialog.show(FaceDetectorActivity.this, "正在认证","Loading. Please wait...", true);
-                //Dialog dialog= new Dialog(FaceDetectorActivity.this);
-               // dialog.setContentView(R.layout.activity_main);
-
-                TextView dialogText=(TextView)findViewById(R.id.dialog_text);
-               // if (mDetectorData != null && mDetectorData.getFaceRectList() != null)
-               // dialogText.setText("认证成功");
-               // dialogText.setTitle("认证成功");
-
-
-                //else dialogText.setText("认证失败");
                 centerDialog.show();
 
             }
         });
 
         centerDialog = new CenterDialog(this, R.layout.dialog_layout,
-                new int[]{R.id.dialog_cancel, R.id.dialog_sure});
+                new int[]{R.id.dialog_cancel, R.id.dialog_sure},"认证成功");
         centerDialog.setOnCenterItemClickListener(this);
 
         mDetectorProxy = new DetectorProxy.Builder(mFace_detector_preview)
@@ -183,7 +172,7 @@ public class FaceDetectorActivity extends Activity implements  CenterDialog.OnCe
     public void OnCenterItemClick(CenterDialog dialog, View view) {
         switch (view.getId()){
             case R.id.dialog_sure:
-                Toast.makeText(FaceDetectorActivity.this,"按钮点击",Toast.LENGTH_SHORT).show();
+                Toast.makeText(FaceDetectorActivity.this,"跑腿人识别成功!",Toast.LENGTH_SHORT).show();
                 finish();
                 break;
             default:

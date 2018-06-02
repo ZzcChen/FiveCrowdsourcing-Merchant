@@ -16,8 +16,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -28,7 +27,7 @@
         android:theme="@style/Theme.AppCompat">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="ANfcfEpZxE64eDWvKGH9eBx8Md0jXRT5" />
+            android:value="mj1BZXXa7TthCEUmZGlYsMKkpQx4oB3G" />
 
         <activity
             android:name=".view.RegisterActivity"
@@ -60,8 +59,8 @@
 
         <activity
             android:name=".view.MapsActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="" />
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.Step2Activity"
             android:label=""
@@ -72,16 +71,24 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.TrackActivity"
-        android:label=""
-        android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".view.WebviewActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.WebviewActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.UserCenterActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.AssesActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.FaceDetectorActivity" />
+        <activity android:name=".view.AddOrderActivity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".view.UserCenterActivity"
-            android:label=""
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".view.AssesActivity" />
-        <activity android:name=".view.FaceDetectorActivity" />
     </application>
 
 </manifest>

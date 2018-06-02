@@ -5,6 +5,7 @@ package com.example.administrator.fivecrowdsourcing_merchant.fragment;
  */
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.administrator.fivecrowdsourcing_merchant.R;
 import com.example.administrator.fivecrowdsourcing_merchant.adapter.PendingGoodAdpater;
@@ -24,6 +26,10 @@ import com.example.administrator.fivecrowdsourcing_merchant.adapter.PullToRefres
 import com.example.administrator.fivecrowdsourcing_merchant.model.DeliveryOrder;
 import com.example.administrator.fivecrowdsourcing_merchant.model.Merchant;
 import com.example.administrator.fivecrowdsourcing_merchant.presenter.PendingOrderPresenter;
+import com.example.administrator.fivecrowdsourcing_merchant.view.AddOrderActivity;
+import com.example.administrator.fivecrowdsourcing_merchant.view.CenterDialog;
+import com.example.administrator.fivecrowdsourcing_merchant.view.FaceDetectorActivity;
+import com.example.administrator.fivecrowdsourcing_merchant.view.UserCenterActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +45,7 @@ public class PendingOrderFragment extends Fragment implements SwipeRefreshLayout
     private FloatingActionButton floatingActionButton;
     private PendingOrderPresenter pendingOrderPresenter = new PendingOrderPresenter(this);
     private Merchant merchant;
-
+    private CenterDialog centerDialog;
     private PullToRefreshAdapter mPendingAdapter;//刷新适配器
 
     private String mUserToken;
@@ -73,13 +79,51 @@ public class PendingOrderFragment extends Fragment implements SwipeRefreshLayout
         mSwipeLayout.setOnRefreshListener(this);
         floatingActionButton = view.findViewById(R.id.create_order);
         pendingOrderPresenter.dispalyInitOrder(merchant);
+        centerDialog = new CenterDialog(getActivity(), R.layout.dialog_layout, new int[]{R.id.dialog_cancel, R.id.dialog_sure}, "请先缴纳保证金");
+//        centerDialog.ChangeDialogText("前往缴纳","让我想想","请先缴纳保证金");
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //答辩展示
+                Intent intent=new Intent(getActivity(), AddOrderActivity.class);
+                startActivity(intent);
                 mMyOrder = getmMyOrder();
                 pendingOrderPresenter.CreaterOrder(mMyOrder);
-//                initData();
-//                initAdapter();
+//                //弹出交押金对话框
+//                if (merchant.getMargin() == 0) {
+////视频演示 隐藏float按钮
+//                    floatingActionButton.setVisibility(View.INVISIBLE);
+//
+//
+//                    centerDialog.show();
+//                    centerDialog.setOnCenterItemClickListener(new CenterDialog.OnCenterItemClickListener() {
+//                        @Override
+//                        public void OnCenterItemClick(CenterDialog dialog, View view) {
+//                            switch (view.getId()) {
+//                                case R.id.dialog_sure:
+//                                    Toast.makeText(getActivity(), "前往缴纳", Toast.LENGTH_SHORT).show();
+//                                    Intent intent = new Intent(getActivity(), UserCenterActivity.class);
+//                                    intent.putExtra("type", 1);
+//                                    intent.putExtra("merchant", merchant);
+//                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//
+//                                    startActivity(intent);
+//                                    break;
+//                                default:
+//                                    Toast.makeText(getActivity(), "下次再缴纳", Toast.LENGTH_SHORT).show();
+//                                    //onResume();
+//
+//                                    break;
+//                            }
+//                        }
+//                    });
+//                } else {
+//                    mMyOrder = getmMyOrder();
+//                    pendingOrderPresenter.CreaterOrder(mMyOrder);
+////                initData();
+////                initAdapter();
+//                }
             }
         });
         return view;

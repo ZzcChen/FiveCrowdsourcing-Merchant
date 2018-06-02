@@ -41,8 +41,9 @@ public class LoginPresenter {
 
 //        //特殊通道，当服务器不行时直接登陆
 //        merchant.setName("zzc");
+//        merchant.setStatus("2");
 //        loginView.onSuccess(merchant);
-        servletIP=url+servletName;
+//        servletIP=url+servletName;
         try {
             sendRequestWithOkHttp(servletIP,phone,password);
         } catch ( SocketTimeoutException e) {
